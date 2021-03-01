@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RecordController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -27,4 +29,10 @@ Route::group(['prefix' => '/auth'], function() {
   Route::post('/register', [RegisterController::class, 'store']);
   Route::post('/login', [LoginController::class, 'store']);
   Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+});
+
+// USERS
+Route::group(['prefix' => '/users'], function() {
+  Route::get('/{username}/create', [RecordController::class, 'index'])->name('create');
+  Route::get('/{username}', [ProfileController::class, 'index'])->name('profile');
 });
