@@ -9,10 +9,10 @@
         <a href="{{ route('register') }}" class="ml-6 hover:opacity-70 transition duration 300 ease">Register</a>
       @endguest
       @auth
-          <a href="">Profile</a>
-          <form action="" method="post">
+          <a href="" class="ml-6 hover:opacity-70 transition duration 300 ease">Profile</a>
+          <form action="{{ route('logout') }}" method="post">
             @csrf
-            <button type="submit">Logout</button>
+            <button type="submit" class="ml-6 hover:opacity-70 transition duration 300 ease">Logout</button>
           </form>
       @endauth
     </div>

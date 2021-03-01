@@ -10,14 +10,29 @@
             <div class="flex flex-col my-4">
                <label for="username" class="font-light py-1">Username:</label>
                <input type="text" name="username" placeholder="folky_dokey" class="border border-gray-300 rounded-lg p-2">
+               @error('username')
+                  <small class="text-red-500">
+                     {{ $message }}
+                  </small>
+               @enderror
             </div>
             <div class="flex flex-col my-4">
                <label for="email" class="font-light py-1">Email:</label>
                <input type="email" name="email" placeholder="folky_dokey@email.com" class="border border-gray-300 rounded-lg p-2">
+               @error('email')
+                  <small class="text-red-500">
+                     {{ $message }}
+                  </small>
+               @enderror
             </div>
             <div class="flex flex-col my-4">
                <label for="password" class="font-light py-1">Password:</label>
                <input type="password" name="password" placeholder="********" class="border border-gray-300 rounded-lg p-2">
+               @error('password')
+                  <small class="text-red-500">
+                     {{ $message }}
+                  </small>
+               @enderror
             </div>
             <div class="flex flex-col my-4">
                <label for="password_confirmation" class="font-light py-1">Confirm password:</label>
