@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Record extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'artist',
+        'label',
+        'catalog_number',
+        'year',
+        'diameter',
+        'rpm',
+        'image'
+    ];
 }

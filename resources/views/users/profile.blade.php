@@ -20,7 +20,6 @@
                     <a href="" class="mx-8 my-8">Followers</a>
                 </div>
             </div>
-            
         </div>
         <hr>
     </section>

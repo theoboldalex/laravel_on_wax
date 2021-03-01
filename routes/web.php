@@ -34,5 +34,6 @@ Route::group(['prefix' => '/auth'], function() {
 // USERS
 Route::group(['prefix' => '/users'], function() {
   Route::get('/{username}/create', [RecordController::class, 'index'])->name('create');
+  Route::post('/{username}/create', [RecordController::class, 'store']);
   Route::get('/{username}', [ProfileController::class, 'index'])->name('profile');
 });
