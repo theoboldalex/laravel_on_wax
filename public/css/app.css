@@ -31352,6 +31352,24 @@ video {
           animation: bounce 1s infinite;
 }
 
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+
+@media (max-width: 800px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
