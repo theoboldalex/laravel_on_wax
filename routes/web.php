@@ -37,3 +37,8 @@ Route::group(['prefix' => '/users'], function() {
   Route::post('/{username}/create', [RecordController::class, 'store']);
   Route::get('/{username}', [ProfileController::class, 'index'])->name('profile');
 });
+
+// RECORDS
+Route::group(['prefix' => '/records'], function() {
+  Route::get('/{id}', [RecordController::class, 'show'])->name('record_detail');
+});

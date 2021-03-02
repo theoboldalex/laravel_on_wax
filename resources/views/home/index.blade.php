@@ -8,7 +8,7 @@
     <div class="card-grid">
         @foreach ($records as $record)
             <div class="border rounded-lg p-4 w-full">
-                <h4 class="font-semibold text-xl">{{ $record->title }}</h4>
+                <h4 class="font-semibold text-xl"><a href="{{ route('record_detail', $record->id) }}">{{ $record->title }}</a></h4>
                 <p>{{ $record->artist }}</p>
             </div>
         @endforeach

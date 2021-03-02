@@ -12,6 +12,15 @@ class RecordController extends Controller
         return view('users.create');
     }
 
+    public function show($id)
+    {
+        $record = Record::where('id', $id)->first();
+
+        return view('records.detail', [
+            'record' => $record
+        ]);
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
