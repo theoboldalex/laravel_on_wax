@@ -2,7 +2,7 @@
 
 @section('content')
     @auth
-        <h1 class="font-semibold text-3xl my-6">hello {{ auth()->user()->username }}</h1>
+        <h1 class="font-semibold text-3xl my-6">Hello {{ auth()->user()->username }}</h1>
     @endauth
     <h2 class="font-semibold text-2xl my-6">Latest uploads</h2>
     <div class="card-grid">
