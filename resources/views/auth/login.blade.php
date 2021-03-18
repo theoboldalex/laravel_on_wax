@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex justify-center">
+    <div class="flex justify-center" id="alert">
         @if (session('status'))
-            <div class="w-6/12 py-2 border border-red-500 rounded-lg bg-red-200 text-red-800 text-center my-4">
+            <div class="w-6/12 py-2 border border-red-500 rounded-lg bg-red-200 text-red-800 text-center mt-4">
                 {{ session('status') }}
             </div>
         @endif
@@ -12,7 +12,7 @@
         <div class="w-full md:w-6/12 bg-gray-200 rounded-lg p-4 md:p-12 shadow">
             <h1 class="font-bold text-3xl">Login</h1>
 
-            <form action="" method="POST">
+            <form action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="flex flex-col my-4">
                     <label for="email" class="font-light py-1">Email:</label>
@@ -40,4 +40,11 @@
                                                                            class="text-primary">Register</a></small>
         </div>
     </div>
+
+    <script>
+        const alert = document.querySelector('#alert');
+        setTimeout(() => {
+            alert.style.display = 'none';
+        }, 5000);
+    </script>
 @endsection
