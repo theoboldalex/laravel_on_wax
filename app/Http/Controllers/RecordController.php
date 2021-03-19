@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Record;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RecordController extends Controller
 {
@@ -28,6 +30,7 @@ class RecordController extends Controller
             'artist' => 'required',
         ]);
 
+        $path = $request->file('image')->store('public/records');
         $record = Record::create([
             'title' => $request->title,
             'artist' => $request->artist,
@@ -36,9 +39,10 @@ class RecordController extends Controller
             'year' => $request->year,
             'diameter' => $request->diameter,
             'rpm' => $request->rpm,
-            'image' => $request->image,
+            'image' => Str::after($path, 'public/records/'),
             'user_id' => auth()->id()
         ]);
+
 
         return redirect()->route('home');
     }

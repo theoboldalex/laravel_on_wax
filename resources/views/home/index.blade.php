@@ -8,7 +8,7 @@
     <h2 class="font-semibold text-2xl my-6">Latest uploads</h2>
     <div class="card-grid">
         @foreach ($records as $record)
-            <div class=" rounded overflow-hidden border w-full bg-white mx-3 md:mx-0 lg:mx-0">
+            <div class="rounded overflow-hidden border w-full bg-white">
                 <div class="w-full flex justify-between p-3">
                     <div class="flex">
                         <div class="rounded-full h-8 w-8 bg-gray-500 flex items-center justify-center overflow-hidden">
@@ -19,7 +19,7 @@
                     <span class="px-2 hover:bg-gray-300 cursor-pointer rounded"><i class="fas fa-ellipsis-h pt-2 text-lg"></i></span>
                 </div>
                 <a href="{{ route('record_detail', $record->id) }}">
-                    <img class="w-full bg-cover" src="https://www.folkradio.co.uk/wp-content/uploads/2017/09/Nic-Jones-Penguin-Eggs-Vinyl.jpg">
+                    <img class="w-full bg-cover" src="{{ asset('storage/records/' . $record->image) }}">
                 </a>
                 <div class="px-3 pb-2">
                     <div class="pt-2">

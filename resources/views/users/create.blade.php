@@ -3,7 +3,7 @@
 @section('content')
     <section class="my-8">
         <h1 class="font-semibold text-3xl">Add to your collection</h1>
-        <form action="{{ route('create', auth()->user()->username) }}" method="POST" class="font-light">
+        <form action="{{ route('create', auth()->user()->username) }}" method="POST" class="font-light" enctype="multipart/form-data">
             @csrf
             <div class="flex flex-col my-2">
                 <label for="title">Title:</label>
