@@ -36,7 +36,8 @@ class RecordController extends Controller
             'year' => $request->year,
             'diameter' => $request->diameter,
             'rpm' => $request->rpm,
-            'image' => $request->image
+            'image' => $request->image,
+            'user_id' => auth()->id()
         ]);
 
         return redirect()->route('home');

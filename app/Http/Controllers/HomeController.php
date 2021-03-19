@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $records = Record::get();
+        $records = Record::with('user')->get();
         return view('home.index', [
             'records' => $records
         ]);

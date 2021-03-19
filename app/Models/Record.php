@@ -17,6 +17,12 @@ class Record extends Model
         'year',
         'diameter',
         'rpm',
-        'image'
+        'image',
+        'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
