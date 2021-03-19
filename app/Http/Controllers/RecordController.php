@@ -25,6 +25,7 @@ class RecordController extends Controller
 
     public function store(Request $request)
     {
+        // validate image filetype
         $this->validate($request, [
             'title' => 'required',
             'artist' => 'required',
