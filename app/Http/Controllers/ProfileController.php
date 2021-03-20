@@ -10,7 +10,9 @@ class ProfileController extends Controller
 {
     public function index(Request $request)
     {
-        $user = User::where('username', Str::after($request->getRequestUri(), '/users/'))->first();
+        $user = User::where('username', Str::after($request->getRequestUri(), '/users/'))
+            ->with('records')
+            ->first();
         return view('users.profile', ['user' => $user]);
     }
 

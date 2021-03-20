@@ -24,7 +24,7 @@
                     @endauth
                 </div>
                 <div class="flex">
-                    <a href="" class="mx-8 my-8">Records</a>
+                    <a href="" class="mx-8 my-8">{{ $user->records->count() }} {{ Str::plural('Record', $user->records->count()) }}</a>
                     <a href="" class="mx-8 my-8">Following</a>
                     <a href="" class="mx-8 my-8">Followers</a>
                 </div>
