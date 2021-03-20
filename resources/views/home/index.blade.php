@@ -14,7 +14,7 @@
                         <div class="rounded-full h-8 w-8 bg-gray-500 flex items-center justify-center overflow-hidden">
                             <img src="{{ asset('img/profile.jpg') }}" alt="profilepic">
                         </div>
-                        <span class="pt-1 ml-2 font-bold text-sm"><a href="{{ route('profile', $record->user->id) }}">{{ $record->user->username }}</a></span>
+                        <span class="pt-1 ml-2 font-bold text-sm"><a href="{{ route('profile', $record->user->username) }}">{{ $record->user->username }}</a></span>
                     </div>
                     <span class="px-2 hover:bg-gray-300 cursor-pointer rounded"><i class="fas fa-ellipsis-h pt-2 text-lg"></i></span>
                 </div>
