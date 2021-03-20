@@ -13,6 +13,7 @@ class ProfileController extends Controller
         $user = User::where('username', Str::after($request->getRequestUri(), '/users/'))
             ->with('records')
             ->first();
+
         return view('users.profile', ['user' => $user]);
     }
 

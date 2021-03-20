@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <a href="{{ route('record_detail', $record->id) }}">
-                        <div class="text-sm mb-2 text-gray-400 font-medium">View all 14 comments</div>
+                        <div class="text-sm mb-2 text-gray-400 font-medium">{{ $record->created_at->diffForHumans() }}</div>
                     </a>
                 </div>
             </div>
