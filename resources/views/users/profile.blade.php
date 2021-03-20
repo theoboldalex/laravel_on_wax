@@ -4,7 +4,7 @@
     <section>
         <div class="flex my-8">
             <div class="md:w-4/12 flex justify-center items-center">
-                <img src="{{ asset('img/profile.jpg') }}" alt="profile image" width="200" class="rounded-full">
+                <img src="{{ asset('storage/avatar/' . $user->avatar) }}" alt="profile image" width="200" class="rounded-full">
             </div>
             <div class="md:w-8/12 flex flex-col items-center justify-center">
                 <div class="flex justify-center items-center">
