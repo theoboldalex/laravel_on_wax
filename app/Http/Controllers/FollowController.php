@@ -18,19 +18,21 @@ class FollowController extends Controller
         $user->followers()->attach(auth()->id());
 
         return redirect()
-            ->route('profile', $user->username)
-            ->with(['user' => $user]);
+            ->route('profile', $user->username);
+//            ->with(['user' => $user]);
     }
 
     public function unfollow(Request $request)
     {
-        $username = Str::before(Str::after($request->getRequestUri(), '/users/'), '/follow');
+        $username = Str::before(Str::after($request->getRequestUri(), '/users/'), '/unfollow');
         $user = User::where('username', $username)
             ->with('records')
             ->first();
 
         $user->followers()->detach(auth()->id());
 
-        return view('users.profile', ['user' => $user]);
+        return redirect()
+            ->route('profile', $user->username);
+//            ->with(['user' => $user]);
     }
 }
