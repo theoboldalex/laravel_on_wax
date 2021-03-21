@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $records = Record::with('user')->get();
+        $records = Record::with('user')->orderByDesc('created_at')->get();
         return view('home.index', [
             'records' => $records
         ]);
