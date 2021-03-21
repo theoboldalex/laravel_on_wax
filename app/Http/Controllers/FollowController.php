@@ -15,7 +15,11 @@ class FollowController extends Controller
         ->with('records')
         ->first();
 
-        return view('users.profile', ['user' => $user]);
+        $user->followers()->attach(auth()->id());
+
+        return redirect()
+            ->route('profile', $user->username)
+            ->with(['user' => $user]);
     }
 
     public function unfollow(Request $request)
@@ -24,6 +28,8 @@ class FollowController extends Controller
         $user = User::where('username', $username)
             ->with('records')
             ->first();
+
+        $user->followers()->detach(auth()->id());
 
         return view('users.profile', ['user' => $user]);
     }
