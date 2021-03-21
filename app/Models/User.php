@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function records()
     {
-        return $this->hasMany(Record::class);
+        return $this->hasMany(Record::class)->orderByDesc('created_at');
     }
 
     public function following()
