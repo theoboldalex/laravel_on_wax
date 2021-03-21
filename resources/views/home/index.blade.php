@@ -39,4 +39,5 @@
             </div>
         @endforeach
     </div>
+    <hr class="my-8">
 @endsection
