@@ -11,9 +11,9 @@
                     <h1 class="font-semibold text-3xl mr-8">{{ $user->username }}</h1>
                     @auth
                         @if(auth()->user()->username != Str::after(url()->full(), env('APP_URL') . '/users/'))
-                            <form action="{{ route('follow', $user->username) }}" method="post">
+                            <form action="{{ $isFollowing ? route('unfollow', $user->username) : route('follow', $user->username) }}" method="post">
                                 @csrf
-                                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease">Follow</button>
+                                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease">{{ $isFollowing ? 'Unfollow' : 'Follow' }}</button>
                             </form>
                         @else
                             <form action="" method="post">
@@ -25,8 +25,8 @@
                 </div>
                 <div class="flex">
                     <a href="" class="mx-8 my-8">{{ $user->records->count() }} {{ Str::plural('Record', $user->records->count()) }}</a>
-                    <a href="" class="mx-8 my-8">Following</a>
-                    <a href="" class="mx-8 my-8">Followers</a>
+                    <a href="" class="mx-8 my-8">{{ $user->following()->count() }} Following</a>
+                    <a href="" class="mx-8 my-8">{{ $user->followers()->count() }} Followers</a>
                 </div>
             </div>
         </div>

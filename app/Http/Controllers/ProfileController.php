@@ -11,10 +11,21 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         $user = User::where('username', Str::after($request->getRequestUri(), '/users/'))
-            ->with('records')
+            ->with(['records', 'followers'])
             ->first();
 
-        return view('users.profile', ['user' => $user]);
+        if ($user->followers->count()) {
+            foreach ($user->followers as $follower) {
+                $isFollowing = $follower->id === auth()->id();
+            }
+        } else {
+            $isFollowing = false;
+        }
+
+        return view('users.profile', [
+            'user' => $user,
+            'isFollowing' => $isFollowing
+        ]);
     }
 
     public function show($id)
