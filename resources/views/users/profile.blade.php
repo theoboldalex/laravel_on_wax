@@ -11,7 +11,7 @@
                     <h1 class="font-semibold text-3xl mr-8">{{ $user->username }}</h1>
                     @auth
                         @if(auth()->user()->username != Str::after(url()->full(), env('APP_URL') . '/users/'))
-                            <form action="" method="post">
+                            <form action="{{ route('follow', $user->username) }}" method="post">
                                 @csrf
                                 <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease">Follow</button>
                             </form>
@@ -37,15 +37,6 @@
         <div class="card-grid my-8">
             @foreach ($user->records as $record)
                 <div class="rounded overflow-hidden border w-full bg-white">
-{{--                    <div class="w-full flex justify-between p-3">--}}
-{{--                        <div class="flex">--}}
-{{--                            <div class="rounded-full h-8 w-8 bg-gray-500 flex items-center justify-center overflow-hidden">--}}
-{{--                                <img src="{{ asset('storage/avatar/' . $record->user->avatar) }}" alt="profilepic">--}}
-{{--                            </div>--}}
-{{--                            <span class="pt-1 ml-2 font-bold text-sm"><a href="{{ route('profile', $record->user->username) }}">{{ $record->user->username }}</a></span>--}}
-{{--                        </div>--}}
-{{--                        <span class="px-2 hover:bg-gray-300 cursor-pointer rounded"><i class="fas fa-ellipsis-h pt-2 text-lg"></i></span>--}}
-{{--                    </div>--}}
                     <img class="w-full bg-cover" src="{{ asset('storage/records/' . $record->image) }}" width="200">
                     <div class="px-3 pb-2">
                         <div class="pt-2">
