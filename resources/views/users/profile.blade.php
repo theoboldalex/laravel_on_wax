@@ -13,7 +13,7 @@
                         @if(auth()->user()->username != Str::after(url()->full(), env('APP_URL') . '/users/'))
                             <form action="{{ route('follow', $user->username) }}" method="post">
                                 @csrf
-                                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease">Follow</button>
+                                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease">{{ $isFollowing ? 'Unfollow' : 'Follow' }}</button>
                             </form>
                         @else
                             <form action="" method="post">
