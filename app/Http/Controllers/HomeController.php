@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Record;
+use App\Models\User;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,11 +16,18 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        // get only records by those you follow and paginate them.
+        $following = User::with('following')
+            ->whereHas('followers', function ($query) {
+                $query->where('user_id', auth()->id());
+            })
+            ->pluck('id');
+
         $feed = Record::with('user')
+            ->whereHas('user', function ($query) use ($following) {
+                $query->whereIn('id', $following);
+            })
             ->orderByDesc('created_at')
             ->paginate(4);
-
 
         return view('home.index', [
             'records' => $records,
