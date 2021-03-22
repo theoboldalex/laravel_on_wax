@@ -17,7 +17,8 @@ class HomeController extends Controller
         // get only records by those you follow and paginate them.
         $feed = Record::with('user')
             ->orderByDesc('created_at')
-            ->get();
+            ->paginate(4);
+
 
         return view('home.index', [
             'records' => $records,

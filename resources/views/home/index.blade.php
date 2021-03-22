@@ -44,9 +44,9 @@
     </div>
     <hr class="my-8">
     @auth
-        <section>
+        <section class="mb-8">
             <h2 class="font-semibold text-2xl my-6">Your Feed</h2>
-            <div class="card-grid">
+            <div class="card-grid mb-8">
                 @foreach($feed as $feedItem)
                     <div class="rounded overflow-hidden border w-full bg-white">
                         <div class="w-full flex justify-between p-3">
@@ -85,6 +85,7 @@
                     </div>
                 @endforeach
             </div>
+            {{ $feed->links() }}
         </section>
     @endauth
 @endsection
