@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class FollowController extends Controller
 {
-    public function follow(Request $request)
+    public function follow()
     {
         $username = request()->route()->parameter('username');
         $user = User::where('username', $username)
@@ -19,10 +19,9 @@ class FollowController extends Controller
 
         return redirect()
             ->route('profile', $user->username);
-//            ->with(['user' => $user]);
     }
 
-    public function unfollow(Request $request)
+    public function unfollow()
     {
         $username = request()->route()->parameter('username');
         $user = User::where('username', $username)
@@ -33,6 +32,5 @@ class FollowController extends Controller
 
         return redirect()
             ->route('profile', $user->username);
-//            ->with(['user' => $user]);
     }
 }

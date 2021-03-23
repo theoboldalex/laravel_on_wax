@@ -32,6 +32,7 @@ class RecordController extends Controller
         ]);
 
         $path = $request->file('image')->store('public/records');
+
         $record = Record::create([
             'title' => $request->title,
             'artist' => $request->artist,

@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $reqUsername = request()->route()->parameter('username');
 
