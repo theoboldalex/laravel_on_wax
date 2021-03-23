@@ -10,7 +10,7 @@ class ProfileController extends Controller
 {
     public function index(Request $request)
     {
-        $user = User::where('username', Str::after($request->getRequestUri(), '/users/'))
+        $user = User::where('username', request()->route()->parameter('username'))
             ->with(['records', 'followers'])
             ->first();
 
