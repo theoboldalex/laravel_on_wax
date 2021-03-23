@@ -7,11 +7,17 @@
             @csrf
             <div class="flex flex-col my-2">
                 <label for="title">Title:</label>
-                <input type="text" name="title" class="border rounded-lg p-2">
+                <input type="text" name="title" class="border rounded-lg p-2 @error('title') border-red-500 @enderror">
+                @error('title')
+                    <small class="text-red-500">{{ $message }}</small>
+                @enderror
             </div>
             <div class="flex flex-col my-2">
                 <label for="artist">Artist:</label>
-                <input type="text" name="artist" class="border rounded-lg p-2">
+                <input type="text" name="artist" class="border rounded-lg p-2 @error('artist') border-red-500 @enderror">
+                @error('artist')
+                    <small class="text-red-500">{{ $message }}</small>
+                @enderror
             </div>
             <div class="flex flex-col my-2">
                 <label for="label">Label:</label>
@@ -46,6 +52,9 @@
             <div class="flex flex-col my-2">
                 <label for="image">Upload Artwork</label>
                 <input type="file" name="image">
+                @error('image')
+                    <small class="text-red-500">{{ $message }}</small>
+                @enderror
             </div>
             <button type="submit" class="w-full bg-primary rounded-lg py-2 my-6 text-white font-light hover:opacity-70 transition duration-300 ease">Collect</button>
         </form>
