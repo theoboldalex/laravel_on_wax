@@ -10,7 +10,7 @@ class FollowController extends Controller
 {
     public function follow(Request $request)
     {
-        $username = Str::before(Str::after($request->getRequestUri(), '/users/'), '/follow');
+        $username = request()->route()->parameter('username');
         $user = User::where('username', $username)
         ->with('records')
         ->first();
@@ -24,7 +24,7 @@ class FollowController extends Controller
 
     public function unfollow(Request $request)
     {
-        $username = Str::before(Str::after($request->getRequestUri(), '/users/'), '/unfollow');
+        $username = request()->route()->parameter('username');
         $user = User::where('username', $username)
             ->with('records')
             ->first();
