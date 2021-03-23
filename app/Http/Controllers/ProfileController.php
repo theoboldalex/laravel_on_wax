@@ -30,6 +30,12 @@ class ProfileController extends Controller
 
     public function show($id)
     {
+        $reqUsername = request()->route()->parameter('username');
+
+        if ($reqUsername !== auth()->user()->username) {
+            return back();
+        }
+
         return view('users.edit_profile');
     }
 }
