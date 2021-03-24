@@ -11,6 +11,7 @@ class FollowController extends Controller
     public function follow()
     {
         $username = request()->route()->parameter('username');
+
         $user = User::where('username', $username)
         ->with('records')
         ->first();
@@ -24,6 +25,7 @@ class FollowController extends Controller
     public function unfollow()
     {
         $username = request()->route()->parameter('username');
+
         $user = User::where('username', $username)
             ->with('records')
             ->first();
@@ -36,7 +38,15 @@ class FollowController extends Controller
 
     public function following()
     {
-        return view('users.following');
+        $username = request()->route()->parameter('username');
+
+        $user = User::where('username', $username)
+            ->with('following')
+            ->first();
+
+        return view('users.following', [
+            'user' => $user,
+        ]);
     }
 
     public function followers()
