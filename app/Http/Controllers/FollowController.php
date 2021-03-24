@@ -51,6 +51,14 @@ class FollowController extends Controller
 
     public function followers()
     {
-        return view('users.followers');
+        $username = request()->route()->parameter('username');
+
+        $user = User::where('username', $username)
+            ->with('followers')
+            ->first();
+
+        return view('users.followers', [
+            'user' => $user,
+        ]);
     }
 }
