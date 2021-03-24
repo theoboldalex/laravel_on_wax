@@ -40,4 +40,14 @@ class ProfileController extends Controller
 
         return view('users.edit_profile');
     }
+
+    public function store(Request $request)
+    {
+        $path = $request->file('avatar')->store('public/avatar');
+
+        $user = User::where('id', auth()->id())
+            ->update(['avatar' => Str::after($path, 'public/avatar/')]);
+
+        return redirect()->route('profile', $request->route()->username);
+    }
 }

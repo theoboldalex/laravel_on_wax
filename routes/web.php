@@ -38,6 +38,7 @@ Route::group(['prefix' => '/users'], function () {
     Route::post('/{username}/create', [RecordController::class, 'store'])->middleware(['auth']);
     Route::get('/{username}', [ProfileController::class, 'index'])->name('profile');
     Route::get('/{username}/edit', [ProfileController::class, 'show'])->name('edit_profile')->middleware(['auth']);
+    Route::post('/{username}/edit', [ProfileController::class, 'store'])->middleware(['auth']);
     Route::post('/{username}/follow', [FollowController::class, 'follow'])->name('follow')->middleware(['auth']);
     Route::post('/{username}/unfollow', [FollowController::class, 'unfollow'])->name('unfollow')->middleware(['auth']);
 });
