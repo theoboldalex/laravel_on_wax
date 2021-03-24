@@ -26,7 +26,7 @@
                 <div class="flex">
                     <p class="mx-8 my-8">{{ $user->records->count() }} {{ Str::plural('Record', $user->records->count()) }}</p>
                     <a href="{{ route('following', auth()->user()->username) }}" class="mx-8 my-8">{{ $user->following()->count() }} Following</a>
-                    <a href="{{ route('following', auth()->user()->username) }}" class="mx-8 my-8">{{ $user->followers()->count() }} Followers</a>
+                    <a href="{{ route('followers', auth()->user()->username) }}" class="mx-8 my-8">{{ $user->followers()->count() }} Followers</a>
                 </div>
             </div>
         </div>
