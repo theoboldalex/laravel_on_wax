@@ -24,9 +24,9 @@
                     @endauth
                 </div>
                 <div class="flex">
-                    <a href="" class="mx-8 my-8">{{ $user->records->count() }} {{ Str::plural('Record', $user->records->count()) }}</a>
-                    <a href="" class="mx-8 my-8">{{ $user->following()->count() }} Following</a>
-                    <a href="" class="mx-8 my-8">{{ $user->followers()->count() }} Followers</a>
+                    <p class="mx-8 my-8">{{ $user->records->count() }} {{ Str::plural('Record', $user->records->count()) }}</p>
+                    <a href="{{ route('following', auth()->user()->username) }}" class="mx-8 my-8">{{ $user->following()->count() }} Following</a>
+                    <a href="{{ route('following', auth()->user()->username) }}" class="mx-8 my-8">{{ $user->followers()->count() }} Followers</a>
                 </div>
             </div>
         </div>

@@ -33,4 +33,14 @@ class FollowController extends Controller
         return redirect()
             ->route('profile', $user->username);
     }
+
+    public function following()
+    {
+        return view('users.following');
+    }
+
+    public function followers()
+    {
+        return view('users.followers');
+    }
 }
