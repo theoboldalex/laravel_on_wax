@@ -42,7 +42,7 @@
                     </a>
                     <div class="px-3 pb-2">
                         <div class="pt-2">
-                            <i class="far fa-heart cursor-pointer"></i>
+                            <i class="text-gray-400 far fa-heart cursor-pointer"></i>
                             <span class="text-sm text-gray-400 font-medium">12 likes</span>
                         </div>
                         <div class="pt-1">

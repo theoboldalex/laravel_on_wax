@@ -13,8 +13,8 @@ class FollowController extends Controller
         $username = request()->route()->parameter('username');
 
         $user = User::where('username', $username)
-        ->with('records')
-        ->first();
+            ->with('records')
+            ->first();
 
         $user->followers()->attach(auth()->id());
 
@@ -43,7 +43,6 @@ class FollowController extends Controller
         $user = User::where('username', $username)
             ->with('following')
             ->first();
-
 
         return view('users.following', [
             'user' => $user
