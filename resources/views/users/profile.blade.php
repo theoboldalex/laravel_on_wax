@@ -37,7 +37,9 @@
         <div class="card-grid my-8">
             @foreach ($user->records as $record)
                 <div class="rounded overflow-hidden border w-full bg-white">
-                    <img class="w-full bg-cover" src="{{ asset('storage/records/' . $record->image) }}" width="200">
+                    <a href="{{ route('record_detail', $record->id) }}">
+                        <img class="w-full bg-cover" src="{{ asset('storage/records/' . $record->image) }}" width="200">
+                    </a>
                     <div class="px-3 pb-2">
                         <div class="pt-2">
                             <i class="far fa-heart cursor-pointer"></i>

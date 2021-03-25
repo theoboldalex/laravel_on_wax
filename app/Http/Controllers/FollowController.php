@@ -44,8 +44,9 @@ class FollowController extends Controller
             ->with('following')
             ->first();
 
+
         return view('users.following', [
-            'user' => $user,
+            'user' => $user
         ]);
     }
 
