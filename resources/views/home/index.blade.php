@@ -17,8 +17,6 @@
                         <span class="pt-1 ml-2 font-bold text-sm"><a
                                 href="{{ route('profile', $record->user->username) }}">{{ $record->user->username }}</a></span>
                     </div>
-                    <span class="px-2 hover:bg-gray-300 cursor-pointer rounded"><i
-                            class="fas fa-ellipsis-h pt-2 text-lg"></i></span>
                 </div>
                 <a href="{{ route('record_detail', $record->id) }}">
                     <img class="w-full bg-cover" src="{{ asset('storage/records/' . $record->image) }}" width="200">
@@ -59,8 +57,6 @@
                                 <span class="pt-1 ml-2 font-bold text-sm"><a
                                         href="{{ route('profile', $feedItem->user->username) }}">{{ $feedItem->user->username }}</a></span>
                             </div>
-                            <span class="px-2 hover:bg-gray-300 cursor-pointer rounded"><i
-                                    class="fas fa-ellipsis-h pt-2 text-lg"></i></span>
                         </div>
                         <a href="{{ route('record_detail', $feedItem->id) }}">
                             <img class="w-full bg-cover" src="{{ asset('storage/records/' . $feedItem->image) }}"
