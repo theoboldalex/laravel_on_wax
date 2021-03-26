@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\LikesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RecordController;
@@ -48,4 +49,6 @@ Route::group(['prefix' => '/users'], function () {
 // RECORDS
 Route::group(['prefix' => '/records'], function () {
     Route::get('/{id}', [RecordController::class, 'show'])->name('record_detail');
+    Route::post('/{id}/like', [LikesController::class, 'like'])->name('like');
+    Route::post('/{id}/unlike', [LikesController::class, 'unlike'])->name('unlike');
 });
