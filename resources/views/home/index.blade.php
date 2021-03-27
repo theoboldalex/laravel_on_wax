@@ -72,7 +72,7 @@
                         <div class="px-3 pb-2">
                             <div class="pt-2 text-sm flex text-gray-400">
                                 @auth
-                                    <form action="{{ route('like', $record->id) }}" method="post">
+                                    <form action="{{ route('like', $feedItem->id) }}" method="post">
                                         @csrf
                                         <button type="submit">
                                             <i class="far fa-heart cursor-pointer mr-2"></i>

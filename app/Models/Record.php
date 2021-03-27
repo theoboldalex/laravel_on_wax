@@ -25,4 +25,10 @@ class Record extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'record_like', 'record_id', 'user_id')
+            ->withTimestamps();
+    }
 }
