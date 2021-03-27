@@ -22,9 +22,16 @@
                     <img class="w-full bg-cover" src="{{ asset('storage/records/' . $record->image) }}" width="200">
                 </a>
                 <div class="px-3 pb-2">
-                    <div class="pt-2">
-                        <i class="far fa-heart cursor-pointer"></i>
-                        <span class="text-sm text-gray-400 font-medium">12 likes</span>
+                    <div class="pt-2 text-sm flex text-gray-400">
+                        @auth
+                            <form action="{{ route('like', $record->id) }}" method="post">
+                                @csrf
+                                <button type="submit">
+                                    <i class="far fa-heart cursor-pointer mr-2"></i>
+                                </button>
+                            </form>
+                        @endauth
+                        <span class="font-medium">12 likes</span>
                     </div>
                     <div class="pt-1">
                         <div class="mb-2 text-sm">
@@ -63,9 +70,16 @@
                                  width="200">
                         </a>
                         <div class="px-3 pb-2">
-                            <div class="pt-2">
-                                <i class="far fa-heart cursor-pointer"></i>
-                                <span class="text-sm text-gray-400 font-medium">12 likes</span>
+                            <div class="pt-2 text-sm flex text-gray-400">
+                                @auth
+                                    <form action="{{ route('like', $record->id) }}" method="post">
+                                        @csrf
+                                        <button type="submit">
+                                            <i class="far fa-heart cursor-pointer mr-2"></i>
+                                        </button>
+                                    </form>
+                                @endauth
+                                <span class="font-medium">12 likes</span>
                             </div>
                             <div class="pt-1">
                                 <div class="mb-2 text-sm">

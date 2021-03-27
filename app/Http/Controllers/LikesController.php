@@ -16,7 +16,7 @@ class LikesController extends Controller
 
     public function like()
     {
-
+        dd(request());
     }
 
     public function unlike()
