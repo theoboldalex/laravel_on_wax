@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Record;
 use Illuminate\Http\Request;
 
 class LikesController extends Controller
@@ -16,7 +17,11 @@ class LikesController extends Controller
 
     public function like()
     {
+        $recordId = request()->route()->parameter('id');
+        $record = Record::where('id', $recordId)->first();
 
+        $record->likes()->attach(auth()->id());
+        return back();
     }
 
     public function unlike()
