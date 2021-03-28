@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $records = Record::with('user')
+        $records = Record::with(['user', 'likes'])
             ->orderByDesc('created_at')
             ->take(4)
             ->get();

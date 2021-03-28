@@ -31,6 +31,5 @@ class LikesController extends Controller
 
         $record->likes()->detach(auth()->id());
         return back();
-
     }
 }
