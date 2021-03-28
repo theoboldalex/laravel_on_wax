@@ -24,10 +24,10 @@
                 <div class="px-3 pb-2">
                     <div class="pt-2 text-sm flex text-gray-400">
                         @auth
-                            <form action="{{ route('like', $record->id) }}" method="post">
+                            <form action="{{ $record->likes->contains(auth()->id()) ? route('unlike', $record->id) : route('like', $record->id) }}" method="post">
                                 @csrf
                                 <button type="submit">
-                                    <i class="far fa-heart cursor-pointer mr-2"></i>
+                                    <i class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
                                 </button>
                             </form>
                         @endauth
