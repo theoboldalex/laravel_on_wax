@@ -22,7 +22,7 @@ class HomeController extends Controller
             })
             ->pluck('id');
 
-        $feed = Record::with('user')
+        $feed = Record::with(['user', 'likes'])
             ->whereHas('user', function ($query) use ($following) {
                 $query->whereIn('id', $following);
             })
