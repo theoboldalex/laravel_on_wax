@@ -26,6 +26,10 @@ class LikesController extends Controller
 
     public function unlike()
     {
+        $recordId = request()->route()->parameter('id');
+        $record = Record::where('id', $recordId)->first();
 
+        $record->likes()->detach(auth()->id());
+        return back();
     }
 }

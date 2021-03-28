@@ -24,14 +24,16 @@
                 <div class="px-3 pb-2">
                     <div class="pt-2 text-sm flex text-gray-400">
                         @auth
-                            <form action="{{ route('like', $record->id) }}" method="post">
+                            <form action="{{ $record->likes->contains(auth()->id()) ? route('unlike', $record->id) : route('like', $record->id) }}" method="post">
                                 @csrf
                                 <button type="submit">
-                                    <i class="far fa-heart cursor-pointer mr-2"></i>
+                                    <i class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
                                 </button>
                             </form>
                         @endauth
-                        <span class="font-medium">12 likes</span>
+                        @if ($record->likes->count())
+                            <span class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
+                        @endif
                     </div>
                     <div class="pt-1">
                         <div class="mb-2 text-sm">
@@ -72,14 +74,16 @@
                         <div class="px-3 pb-2">
                             <div class="pt-2 text-sm flex text-gray-400">
                                 @auth
-                                    <form action="{{ route('like', $feedItem->id) }}" method="post">
+                                    <form action="{{ $feedItem->likes->contains(auth()->id()) ? route('unlike', $feedItem->id) : route('like', $feedItem->id) }}" method="post">
                                         @csrf
                                         <button type="submit">
-                                            <i class="far fa-heart cursor-pointer mr-2"></i>
+                                            <i class="far fa-heart mr-2 @if($feedItem->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
                                         </button>
                                     </form>
                                 @endauth
-                                <span class="font-medium">12 likes</span>
+                                @if($feedItem->likes->count())
+                                    <span class="font-medium">{{ $feedItem->likes->count() }} {{ Str::plural('like', $feedItem->likes->count()) }}</span>
+                                @endif
                             </div>
                             <div class="pt-1">
                                 <div class="mb-2 text-sm">

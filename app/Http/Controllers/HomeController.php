@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $records = Record::with('user')
+        $records = Record::with(['user', 'likes'])
             ->orderByDesc('created_at')
             ->take(4)
             ->get();
@@ -22,7 +22,7 @@ class HomeController extends Controller
             })
             ->pluck('id');
 
-        $feed = Record::with('user')
+        $feed = Record::with(['user', 'likes'])
             ->whereHas('user', function ($query) use ($following) {
                 $query->whereIn('id', $following);
             })
