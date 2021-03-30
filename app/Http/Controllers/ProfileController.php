@@ -13,7 +13,9 @@ class ProfileController extends Controller
         $reqUsername = request()->route()->parameter('username');
 
         $user = User::where('username', $reqUsername)
-            ->with(['records', 'followers'])
+            ->with(['followers', 'records' => function($query) {
+                $query->with('likes');
+            }])
             ->first();
 
         if ($user->followers->count()) {

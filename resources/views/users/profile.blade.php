@@ -50,7 +50,7 @@
                                     </button>
                                 </form>
                             @endauth
-                            <span class="font-medium">12 likes</span>
+                            <span class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
                         </div>
                         <div class="pt-1">
                             <div class="mb-2 text-sm">
