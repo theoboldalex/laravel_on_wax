@@ -48,9 +48,7 @@
                             </button>
                         </form>
                     @endauth
-                    @if($record->likes->count())
-                        <span class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
-                    @endif
+                    <span class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
                 </div>
             </div>
         </div>
