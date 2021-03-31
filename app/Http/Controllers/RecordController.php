@@ -16,7 +16,8 @@ class RecordController extends Controller
 
     public function show($id)
     {
-        $record = Record::where('id', $id)->first();
+        $record = Record::with(['likes'])
+            ->where('id', $id)->first();
 
         return view('records.detail', [
             'record' => $record
