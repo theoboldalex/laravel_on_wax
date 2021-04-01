@@ -70,7 +70,7 @@
                     </div>
                     <hr>
                     <div class="font-light mt-4">
-                        Awesome dude!
+                        Awesome dude! This is a hard coded comment...
                     </div>
                 </div>
             </div>
