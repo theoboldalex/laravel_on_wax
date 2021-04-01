@@ -6,8 +6,8 @@
             <a href="{{ url()->previous(route('home')) }}"
                class="text-primary hover:opacity-70 transition duration-300 ease-in-out">Back</a>
         </div>
-        <div class="flex">
-            <div class="w-6/12">
+        <div class="flex flex-col lg:flex-row">
+            <div class="lg:w-6/12">
                 <h1 class="font-semibold text-4xl">
                     {{ $record->title }}
                 </h1>
@@ -17,7 +17,7 @@
                      class="my-4"
                      width="500">
             </div>
-            <div class="w-6/12 flex flex-col justify-center items-center text-2xl">
+            <div class="lg:w-6/12 flex flex-col justify-center items-center sm:text-2xl">
                 <div class="flex my-2">
                     <h4 class="font-semibold pr-4">Record Label:</h4>
                     <p class="font-light">{{ $record->label }}</p>
@@ -39,7 +39,7 @@
                     <p class="font-light">{{ $record->rpm }}</p>
                 </div>
 
-                <div class="pt-2 text-sm flex text-gray-400 text-2xl">
+                <div class="pt-2 text-sm flex text-gray-400 text-2xl my-8">
                     @auth
                         <form action="{{ $record->likes->contains(auth()->id()) ? route('unlike', $record->id) : route('like', $record->id) }}" method="post">
                             @csrf
