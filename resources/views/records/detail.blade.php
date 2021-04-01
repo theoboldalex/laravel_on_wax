@@ -18,6 +18,10 @@
                      width="500">
             </div>
             <div class="lg:w-6/12 flex flex-col justify-center items-center sm:text-2xl">
+                <div class="flex flex-col justify-center items-center my-4">
+                    <img src="{{ asset('/storage/avatar/' . $record->user->avatar) }}" alt="" width="100" class="rounded-full mr-4">
+                    <h4 class="font-semibold pr-4">{{ $record->user->username }}</h4>
+                </div>
                 <div class="flex my-2">
                     <h4 class="font-semibold pr-4">Record Label:</h4>
                     <p class="font-light">{{ $record->label }}</p>
