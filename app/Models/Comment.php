@@ -14,4 +14,9 @@ class Comment extends Model
         'user_id',
         'record_id'
     ];
+
+    public function record()
+    {
+        return $this->belongsTo(Record::class);
+    }
 }

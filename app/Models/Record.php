@@ -31,4 +31,9 @@ class Record extends Model
         return $this->belongsToMany(User::class, 'record_like', 'record_id', 'user_id')
             ->withTimestamps();
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
