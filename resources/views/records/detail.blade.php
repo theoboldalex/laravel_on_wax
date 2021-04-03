@@ -61,13 +61,15 @@
         <div class="flex flex-col my-4">
             <h2 class="font-semibold text-3xl">Comments</h2>
 
-            <div class="flex flex-col my-4">
-                <form action="">
-                    @csrf
-                    <textarea name="comment" id="comment" cols="30" rows="5" class="border rounded-lg w-full"></textarea>
-                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease block float-right">Submit</button>
-                </form>
-            <div>
+            @auth
+                <div class="flex flex-col my-4">
+                    <form action="{{ route('comment', $record->id) }}" method="post">
+                        @csrf
+                        <textarea name="comment" id="comment" cols="30" rows="5" class="border rounded-lg w-full p-2"></textarea>
+                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease block float-right">Submit</button>
+                    </form>
+                <div>
+            @endauth
 
 
                 <div class="flex flex-col my-4">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikesController;
 use Illuminate\Support\Facades\Route;
@@ -51,4 +52,5 @@ Route::group(['prefix' => '/records'], function () {
     Route::get('/{id}', [RecordController::class, 'show'])->name('record_detail');
     Route::post('/{id}/like', [LikesController::class, 'like'])->name('like');
     Route::post('/{id}/unlike', [LikesController::class, 'unlike'])->name('unlike');
+    Route::post('/{id}/comment', [CommentController::class, 'store'])->name('comment');
 });
