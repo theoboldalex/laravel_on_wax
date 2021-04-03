@@ -61,19 +61,31 @@
         <div class="flex flex-col my-4">
             <h2 class="font-semibold text-3xl">Comments</h2>
 
-            <div class="flex flex-col my-4">
-                <div class="border rounded-xl p-8">
-                    <div class="flex items-center mb-4">
-                        <img src="{{ asset('/storage/avatar/0kuetINANFXPLMRLochp3ApksEr9A7WbA6i45Kg7.jpg') }}" alt="" width="50" class="rounded-full mr-4">
-                        <h4 class="font-semibold mr-4">folky_dokey</h4>
-                        <h4 class="text-gray-400">1 day ago</h4>
-                    </div>
-                    <hr>
-                    <div class="font-light mt-4">
-                        Awesome dude! This is a hard coded comment...
+            @auth
+                <div class="flex flex-col my-4">
+                    <form action="{{ route('comment', $record->id) }}" method="post">
+                        @csrf
+                        <textarea name="comment" id="comment" cols="30" rows="5" class="border rounded-lg w-full p-2"></textarea>
+                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease block float-right">Submit</button>
+                    </form>
+                <div>
+            @endauth
+
+            @foreach($record->comments as $comment)
+                <div class="flex flex-col my-4">
+                    <div class="border rounded-xl p-8">
+                        <div class="flex items-center mb-4">
+                            <img src="{{ asset('/storage/avatar/' . $comment->user->avatar) }}" alt="" width="50" class="rounded-full mr-4">
+                            <h4 class="font-semibold mr-4">{{ $comment->user->username }}</h4>
+                            <h4 class="text-gray-400">{{ $comment->created_at->diffForHumans() }}</h4>
+                        </div>
+                        <hr>
+                        <div class="font-light mt-4">
+                            {{ $comment->body }}
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </section>
 @endsection
