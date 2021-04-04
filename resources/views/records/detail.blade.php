@@ -61,9 +61,11 @@
         <hr>
         <div class="flex flex-col my-4">
             <h2 class="font-semibold text-3xl">Comments</h2>
+        @endif
 
             @auth
                 <div class="flex flex-col my-4">
+                    <h3 class="font-semibold text-2xl my-4">Add a comment</h3>
                     <form action="{{ route('comment', $record->id) }}" method="post">
                         @csrf
                         <textarea name="comment" id="comment" cols="30" rows="5" class="border rounded-lg w-full p-2"></textarea>
@@ -88,6 +90,5 @@
                 </div>
             @endforeach
         </div>
-        @endif
     </section>
 @endsection
