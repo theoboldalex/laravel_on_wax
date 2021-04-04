@@ -20,7 +20,7 @@ class RecordController extends Controller
             $query->with('user');
         }])
             ->where('id', $id)
-            ->first();
+            ->firstOrFail();
 
         return view('records.detail', [
             'record' => $record
