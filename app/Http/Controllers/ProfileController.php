@@ -16,7 +16,7 @@ class ProfileController extends Controller
             ->with(['followers', 'records' => function($query) {
                 $query->with('likes');
             }])
-            ->first();
+            ->firstOrFail();
 
         if ($user->followers->count()) {
             foreach ($user->followers as $follower) {

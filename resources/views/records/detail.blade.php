@@ -57,12 +57,15 @@
             </div>
         </div>
 
+        @if ($record->comments->count())
         <hr>
         <div class="flex flex-col my-4">
             <h2 class="font-semibold text-3xl">Comments</h2>
+        @endif
 
             @auth
                 <div class="flex flex-col my-4">
+                    <h3 class="font-semibold text-2xl my-4">Add a comment</h3>
                     <form action="{{ route('comment', $record->id) }}" method="post">
                         @csrf
                         <textarea name="comment" id="comment" cols="30" rows="5" class="border rounded-lg w-full p-2"></textarea>
@@ -76,7 +79,7 @@
                     <div class="border rounded-xl p-8">
                         <div class="flex items-center mb-4">
                             <img src="{{ asset('/storage/avatar/' . $comment->user->avatar) }}" alt="" width="50" class="rounded-full mr-4">
-                            <h4 class="font-semibold mr-4">{{ $comment->user->username }}</h4>
+                            <h4 class="font-semibold mr-4"><a href="{{ route('profile', $comment->user->username) }}">{{ $comment->user->username }}</a></h4>
                             <h4 class="text-gray-400">{{ $comment->created_at->diffForHumans() }}</h4>
                         </div>
                         <hr>
