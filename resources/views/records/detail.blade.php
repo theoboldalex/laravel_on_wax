@@ -57,6 +57,7 @@
             </div>
         </div>
 
+        @if ($record->comments->count())
         <hr>
         <div class="flex flex-col my-4">
             <h2 class="font-semibold text-3xl">Comments</h2>
@@ -87,5 +88,6 @@
                 </div>
             @endforeach
         </div>
+        @endif
     </section>
 @endsection
