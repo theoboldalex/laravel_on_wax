@@ -76,7 +76,7 @@
                     <div class="border rounded-xl p-8">
                         <div class="flex items-center mb-4">
                             <img src="{{ asset('/storage/avatar/' . $comment->user->avatar) }}" alt="" width="50" class="rounded-full mr-4">
-                            <h4 class="font-semibold mr-4">{{ $comment->user->username }}</h4>
+                            <h4 class="font-semibold mr-4"><a href="{{ route('profile', $comment->user->username) }}">{{ $comment->user->username }}</a></h4>
                             <h4 class="text-gray-400">{{ $comment->created_at->diffForHumans() }}</h4>
                         </div>
                         <hr>
