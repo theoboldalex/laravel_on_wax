@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <a href="{{ route('record_detail', $record->id) }}">
-                    <img class="w-full bg-cover" src="{{ Storage::disk('s3')->url('records/' . $record->image) }}" width="200">
+                    <img class="w-full bg-cover" src="{{ Storage::disk('s3')->url('public/records/' . $record->image) }}" width="200">
                 </a>
                 <div class="px-3 pb-2">
                     <div class="pt-2 text-sm flex text-gray-400">
