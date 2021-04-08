@@ -10,7 +10,7 @@
                 <div class="flex justify-center items-center">
                     <h1 class="font-semibold text-3xl mr-8">{{ $user->username }}</h1>
                     @auth
-                        @if(auth()->user()->username != Str::after(url()->full(), env('APP_URL') . '/users/'))
+                        @if(auth()->user()->username != request()->route('username'))
                             <form action="{{ $isFollowing ? route('unfollow', $user->username) : route('follow', $user->username) }}" method="post">
                                 @csrf
                                 <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease">{{ $isFollowing ? 'Unfollow' : 'Follow' }}</button>
