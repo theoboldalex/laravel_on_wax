@@ -4,7 +4,7 @@
     <section>
         <div class="flex my-8">
             <div class="md:w-4/12 flex justify-center items-center">
-                <img src="{{ asset('storage/avatar/' . $user->avatar) }}" alt="profile image" width="200" class="rounded-full">
+                <img src="{{ Storage::disk('s3')->url('public/avatar/' . $user->avatar) }}" alt="profile image" width="200" class="rounded-full">
             </div>
             <div class="md:w-8/12 flex flex-col items-center justify-center">
                 <div class="flex justify-center items-center">
@@ -38,7 +38,7 @@
             @foreach ($user->records as $record)
                 <div class="rounded overflow-hidden border w-full bg-white">
                     <a href="{{ route('record_detail', $record->id) }}">
-                        <img class="w-full bg-cover" src="{{ asset('storage/records/' . $record->image) }}" width="200">
+                        <img class="w-full bg-cover" src="{{ Storage::disk('s3')->url('public/records/' . $record->image) }}" width="200">
                     </a>
                     <div class="px-3 pb-2">
                         <div class="pt-2 text-sm flex text-gray-400">
