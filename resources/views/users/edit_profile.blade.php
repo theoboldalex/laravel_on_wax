@@ -8,7 +8,7 @@
             </a>
         </div>
         <h1 class="font-semibold text-4xl">Edit Profile</h1>
-        <img src="{{ asset('storage/avatar/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->username }}'s avatar"
+        <img src="{{ Storage::disk('s3')->url('public/avatar/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->username }}'s avatar"
              width="200" class="rounded-full">
         <form action="{{ route('edit_profile', auth()->user()->username) }}" method="POST"
               enctype="multipart/form-data">
