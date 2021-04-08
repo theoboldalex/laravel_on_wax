@@ -45,7 +45,7 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-        $path = $request->file('avatar')->store('public/avatar');
+        $path = $request->file('avatar')->storePublicly('public/avatar', 's3');
 
         $user = User::where('id', auth()->id())
             ->update(['avatar' => Str::after($path, 'public/avatar/')]);
