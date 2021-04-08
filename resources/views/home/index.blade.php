@@ -12,7 +12,7 @@
                 <div class="w-full flex justify-between p-3">
                     <div class="flex">
                         <div class="rounded-full h-8 w-8 bg-gray-500 flex items-center justify-center overflow-hidden">
-                            <img src="{{ Storage::disk('s3')->url('public/avatar' . $record->user->avatar) }}" alt="profilepic">
+                            <img src="{{ Storage::disk('s3')->url('public/avatar/' . $record->user->avatar) }}" alt="profilepic">
                         </div>
                         <span class="pt-1 ml-2 font-bold text-sm"><a
                                 href="{{ route('profile', $record->user->username) }}">{{ $record->user->username }}</a></span>
