@@ -12,14 +12,14 @@
                     {{ $record->title }}
                 </h1>
                 <h1 class="font-semibold text-2xl opacity-70">{{ $record->artist }}</h1>
-                <img src="{{ asset('storage/records/' . $record->image) }}"
+                <img src="{{ Storage::disk('s3')->url('public/records/' . $record->image) }}"
                      alt="album art for {{ $record->title }} by {{ $record->artist }}"
                      class="my-4"
                      width="500">
             </div>
             <div class="lg:w-6/12 flex flex-col justify-center items-center sm:text-2xl">
                 <div class="flex flex-col justify-center items-center my-4">
-                    <img src="{{ asset('/storage/avatar/' . $record->user->avatar) }}" alt="" width="100" class="rounded-full mr-4">
+                    <img src="{{ Storage::disk('s3')->url('public/avatar/' . $record->user->avatar) }}" alt="" width="100" class="rounded-full mr-4">
                     <h4 class="font-semibold pr-4">{{ $record->user->username }}</h4>
                 </div>
                 <div class="flex my-2">
@@ -78,7 +78,7 @@
                 <div class="flex flex-col my-4">
                     <div class="border rounded-xl p-8">
                         <div class="flex items-center mb-4">
-                            <img src="{{ asset('/storage/avatar/' . $comment->user->avatar) }}" alt="" width="50" class="rounded-full mr-4">
+                            <img src="{{ Storage::disk('s3')->url('public/avatar/' . $comment->user->avatar) }}" alt="" width="50" class="rounded-full mr-4">
                             <h4 class="font-semibold mr-4"><a href="{{ route('profile', $comment->user->username) }}">{{ $comment->user->username }}</a></h4>
                             <h4 class="text-gray-400">{{ $comment->created_at->diffForHumans() }}</h4>
                         </div>
