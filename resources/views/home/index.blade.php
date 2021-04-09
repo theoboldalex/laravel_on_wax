@@ -60,7 +60,7 @@
                             <div class="flex">
                                 <div
                                     class="rounded-full h-8 w-8 bg-gray-500 flex items-center justify-center overflow-hidden">
-                                    <img src="{{ asset('storage/avatar/' . $feedItem->user->avatar) }}"
+                                    <img src="{{ Storage::disk('s3')->url('public/avatar/' . $feedItem->user->avatar) }}"
                                          alt="profilepic">
                                 </div>
                                 <span class="pt-1 ml-2 font-bold text-sm"><a
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <a href="{{ route('record_detail', $feedItem->id) }}">
-                            <img class="w-full bg-cover" src="{{ Storage::disk('s3')->url('records/', $feedItem->image) }}"
+                            <img class="w-full bg-cover" src="{{ Storage::disk('s3')->url('public/records/' . $feedItem->image) }}"
                                  width="200">
                         </a>
                         <div class="px-3 pb-2">
