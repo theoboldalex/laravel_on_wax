@@ -2,7 +2,7 @@
 
 @section('content')
     <section>
-        <div class="flex my-8">
+        <div class="flex flex-col my-8">
             <div class="md:w-4/12 flex justify-center items-center">
                 <img src="{{ Storage::disk('s3')->url('public/avatar/' . $user->avatar) }}" alt="profile image" width="200" class="rounded-full">
             </div>
@@ -23,10 +23,10 @@
                         @endif
                     @endauth
                 </div>
-                <div class="flex">
-                    <p class="mx-8 my-8">{{ $user->records->count() }} {{ Str::plural('Record', $user->records->count()) }}</p>
-                    <a href="{{ route('following', $user->username) }}" class="mx-8 my-8">{{ $user->following()->count() }} Following</a>
-                    <a href="{{ route('followers', $user->username) }}" class="mx-8 my-8">{{ $user->followers()->count() }} Followers</a>
+                <div class="flex flex-col sm:flex-row">
+                    <p class="mx-8 my-4">{{ $user->records->count() }} {{ Str::plural('Record', $user->records->count()) }}</p>
+                    <a href="{{ route('following', $user->username) }}" class="mx-8 my-4 sm:my-8">{{ $user->following()->count() }} Following</a>
+                    <a href="{{ route('followers', $user->username) }}" class="mx-8 my-4 sm:my-8">{{ $user->followers()->count() }} Followers</a>
                 </div>
             </div>
         </div>

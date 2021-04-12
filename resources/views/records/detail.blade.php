@@ -47,7 +47,7 @@
                     @auth
                         <form action="{{ $record->likes->contains(auth()->id()) ? route('unlike', $record->id) : route('like', $record->id) }}" method="post">
                             @csrf
-                            <button type="submit" id="like">
+                            <button type="submit">
                                 <i class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
                             </button>
                         </form>
@@ -92,16 +92,3 @@
         </div>
     </section>
 @endsection
-
-<script type="text/javascript">
-    window.onload = () => {
-
-        const form = document.querySelector('#like')
-
-        form.addEventListener('click', (e) => {
-            e.preventDefault()
-
-            console.log('form')
-        })
-    }
-</script>
