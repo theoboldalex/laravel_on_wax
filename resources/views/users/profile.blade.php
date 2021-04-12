@@ -2,7 +2,7 @@
 
 @section('content')
     <section>
-        <div class="flex my-8">
+        <div class="flex flex-col md:flex-row my-8">
             <div class="md:w-4/12 flex justify-center items-center">
                 <img src="{{ Storage::disk('s3')->url('public/avatar/' . $user->avatar) }}" alt="profile image" width="200" class="rounded-full">
             </div>
