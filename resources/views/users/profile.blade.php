@@ -8,7 +8,7 @@
             </div>
             <div class="md:w-8/12 flex flex-col items-center justify-center">
                 <div class="flex flex-col md:flex-row justify-center items-center">
-                    <h1 class="font-semibold text-xl md:text-3xl md:mr-8">{{ $user->username }}</h1>
+                    <h1 class="font-semibold text-xl mb-8 md:mb-0 md:text-3xl md:mr-8">{{ $user->username }}</h1>
                     @auth
                         @if(auth()->user()->username != request()->route('username'))
                             <form action="{{ $isFollowing ? route('unfollow', $user->username) : route('follow', $user->username) }}" method="post">
