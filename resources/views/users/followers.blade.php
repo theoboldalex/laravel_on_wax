@@ -9,7 +9,7 @@
     <div class="card-grid">
         @foreach($user->followers as $followers)
             <div class="border rounded-lg p-4 flex flex-col justify-center items-center">
-                <img src="{{ asset('storage/avatar/' . $followers->avatar) }}" alt="{{ $followers->username }}'s avatar" width="100" class="rounded-full my-4">
+                <img src="{{ Sotarge::disk('s3')->url('public/avatar/' . $followers->avatar) }}" alt="{{ $followers->username }}'s avatar" width="100" class="rounded-full my-4">
                 <a href="{{ route('profile', $followers->username) }}" class="font-semibold text-xl">{{ $followers->username }}</a>
                 {{--                <form action="{{ $isFollowing ? route('unfollow', $user->username) : route('follow', $user->username) }}" method="post">--}}
                 {{--                    @csrf--}}

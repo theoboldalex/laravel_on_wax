@@ -9,7 +9,7 @@
     <div class="card-grid">
         @foreach($user->following as $following)
             <div class="border rounded-lg p-4 flex flex-col justify-center items-center">
-                <img src="{{ asset('storage/avatar/' . $following->avatar) }}" alt="{{ $following->username }}'s avatar" width="100" class="rounded-full my-4">
+                <img src="{{ Storage::disk('s3')->url('public/avatar/' . $following->avatar) }}" alt="{{ $following->username }}'s avatar" width="100" class="rounded-full my-4">
                 <a href="{{ route('profile', $following->username) }}" class="font-semibold text-xl">{{ $following->username }}</a>
             </div>
         @endforeach
