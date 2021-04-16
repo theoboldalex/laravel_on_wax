@@ -5,7 +5,6 @@
         <h1 class="font-semibold text-3xl my-6">Hello {{ auth()->user()->username }}</h1>
         <hr>
     @endauth
-    @guest
     <h2 class="font-semibold text-2xl my-6">Latest uploads</h2>
     <div class="card-grid">
         @foreach ($records as $record)
@@ -51,8 +50,6 @@
         @endforeach
     </div>
     <hr class="my-8">
-    @endguest
-
     @auth
         <section class="mb-8">
             <h2 class="font-semibold text-2xl my-6">Your Feed</h2>

@@ -13,7 +13,8 @@ class HomeController extends Controller
     {
         $records = Record::with(['user', 'likes'])
             ->orderByDesc('created_at')
-            ->paginate(20);
+            ->take(4)
+            ->get();
 
         $following = User::with('following')
             ->whereHas('followers', function ($query) {
