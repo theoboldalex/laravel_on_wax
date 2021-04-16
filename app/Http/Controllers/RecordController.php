@@ -32,7 +32,7 @@ class RecordController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'artist' => 'required',
-            'image' => 'mimes:jpeg,jpg,png|max:10000'
+            'image' => 'mimes:jpeg,jpg,png|max:30000'
         ]);
 
         $path = $request->file('image')->storePublicly('public/records', 's3');

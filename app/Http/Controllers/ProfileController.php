@@ -45,6 +45,10 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'image' => 'mimes:jpeg,jpg,png|max:30000'
+        ]);
+
         $path = $request->file('avatar')->storePublicly('public/avatar', 's3');
 
         $user = User::where('id', auth()->id())
