@@ -27,7 +27,7 @@ class HomeController extends Controller
                 $query->whereIn('id', $following);
             })
             ->orderByDesc('created_at')
-            ->paginate(4);
+            ->paginate(20);
 
         return view('home.index', [
             'records' => $records,
