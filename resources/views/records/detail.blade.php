@@ -20,7 +20,9 @@
             <div class="lg:w-6/12 flex flex-col justify-center items-center sm:text-2xl">
                 <div class="flex flex-col justify-center items-center my-4">
                     <img src="{{ Storage::disk('s3')->url('public/avatar/' . $record->user->avatar) }}" alt="" width="100" class="rounded-full mr-4">
-                    <h4 class="font-semibold pr-4">{{ $record->user->username }}</h4>
+                    <a href="{{ route('profile', $record->user->username) }}">
+                        <h4 class="font-semibold pr-4">{{ $record->user->username }}</h4>
+                    </a>
                 </div>
                 <div class="flex my-2">
                     <h4 class="font-semibold pr-4">Record Label:</h4>
