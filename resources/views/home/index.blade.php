@@ -1,3 +1,9 @@
+<style>
+    #likeBtn:focus {
+        outline: none;
+    }
+</style>
+
 @extends('layouts.app')
 
 @section('content')
@@ -24,16 +30,11 @@
                 <div class="px-3 pb-2">
                     <div class="pt-2 text-sm flex text-gray-400">
                         @auth
-                            <form action="{{ $record->likes->contains(auth()->id()) ? route('unlike', $record->id) : route('like', $record->id) }}" method="post">
-                                @csrf
-                                <button type="submit">
-                                    <i class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
-                                </button>
-                            </form>
+                            <button id="likeBtn">
+                                <i id="likeIcon" class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
+                            </button>
                         @endauth
-                        @if ($record->likes->count())
-                            <span class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
-                        @endif
+                        <span id="likeCount" class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
                     </div>
                     <div class="pt-1">
                         <div class="mb-2 text-sm">
@@ -74,16 +75,11 @@
                         <div class="px-3 pb-2">
                             <div class="pt-2 text-sm flex text-gray-400">
                                 @auth
-                                    <form action="{{ $feedItem->likes->contains(auth()->id()) ? route('unlike', $feedItem->id) : route('like', $feedItem->id) }}" method="post">
-                                        @csrf
-                                        <button type="submit">
-                                            <i class="far fa-heart mr-2 @if($feedItem->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
-                                        </button>
-                                    </form>
+                                    <button type="submit">
+                                        <i class="far fa-heart mr-2 @if($feedItem->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
+                                    </button>
                                 @endauth
-                                @if($feedItem->likes->count())
-                                    <span class="font-medium">{{ $feedItem->likes->count() }} {{ Str::plural('like', $feedItem->likes->count()) }}</span>
-                                @endif
+                                <span class="font-medium">{{ $feedItem->likes->count() }} {{ Str::plural('like', $feedItem->likes->count()) }}</span>
                             </div>
                             <div class="pt-1">
                                 <div class="mb-2 text-sm">
@@ -103,3 +99,50 @@
         </section>
     @endauth
 @endsection
+
+<script type="text/javascript">
+    window.onload = () => {
+        const likeIcon = document.querySelector('#likeIcon')
+        let isLiked = '{{ $record->likes->contains(auth()->id()) }}' === '1'
+
+        const toggleLike = async () => {
+            const recordId = '{{ $record->id }}'
+            const route = isLiked ? 'unlike' : 'like'
+            const url = `/records/${recordId}/${route}`
+
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-Token': '{{ @csrf_token() }}'
+                }
+            })
+
+            const likeCount = await res.json()
+
+            updateView(isLiked, likeCount)
+            isLiked = !isLiked
+        }
+
+        const updateView = (likeStatus, likeCount) => {
+            const classes = likeStatus ? 'fas text-red-500' : ''
+            const likes = document.querySelector('#likeCount')
+
+            likes.innerHTML = `${likeCount} ${likeCount === 1 ? 'like' : 'likes'}`
+
+            if (!likeStatus) {
+                likeIcon.classList.add('fas')
+                likeIcon.classList.add('text-red-500')
+            } else {
+                likeIcon.classList.remove('fas')
+                likeIcon.classList.remove('text-red-500')
+            }
+        }
+
+        if (likeIcon) {
+            likeIcon.addEventListener('click', toggleLike)
+        }
+    }
+</script>

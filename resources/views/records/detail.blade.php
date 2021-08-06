@@ -1,4 +1,4 @@
-<style type="text/css">
+<style>
 #likeBtn:focus {
     outline: none;
 }
@@ -139,6 +139,8 @@
             }
         }
 
-        likeIcon.addEventListener('click', toggleLike)
+        if (likeIcon) {
+            likeIcon.addEventListener('click', toggleLike)
+        }
     }
 </script>
