@@ -31,10 +31,10 @@
                     <div class="pt-2 text-sm flex text-gray-400">
                         @auth
                             <button id="likeBtn">
-                                <i id="likeIcon" class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
+                                <i id="record_{{ $record->id }}" data-key="{{ $record->id }}" data-liked="{{ $record->likes->contains(auth()->id()) }}" class="likeIcon far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
                             </button>
                         @endauth
-                        <span id="likeCount" class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
+                        <span id="likeCount_{{ $record->id }}" data-key="{{ $record->id }}" class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
                     </div>
                     <div class="pt-1">
                         <div class="mb-2 text-sm">
@@ -102,14 +102,15 @@
 
 <script type="text/javascript">
     window.onload = () => {
-        const likeIcon = document.querySelector('#likeIcon')
-        let isLiked = '{{ $record->likes->contains(auth()->id()) }}' === '1'
+        const likeIcons = document.querySelectorAll('.likeIcon')
 
-        const toggleLike = async () => {
-            const recordId = '{{ $record->id }}'
+        const toggleLike = async (id, key) => {
+            let el = document.querySelector(`#${id}`)
+            let isLiked = el.getAttribute('data-liked')
             const route = isLiked ? 'unlike' : 'like'
-            const url = `/records/${recordId}/${route}`
+            const url = `/records/${key}/${route}`
 
+            console.log(url)
             const res = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -122,13 +123,15 @@
 
             const likeCount = await res.json()
 
-            updateView(isLiked, likeCount)
-            isLiked = !isLiked
+            updateView(isLiked, likeCount, id, key)
+
+            isLiked === '1' ? el.setAttribute('data-liked', '') : el.setAttribute('data-liked', '1')
         }
 
-        const updateView = (likeStatus, likeCount) => {
+        const updateView = (likeStatus, likeCount, recordId, key) => {
+            const likeIcon = document.querySelector(`#${recordId}`)
             const classes = likeStatus ? 'fas text-red-500' : ''
-            const likes = document.querySelector('#likeCount')
+            const likes = document.querySelector(`span[data-key="${key}"]`)
 
             likes.innerHTML = `${likeCount} ${likeCount === 1 ? 'like' : 'likes'}`
 
@@ -141,8 +144,8 @@
             }
         }
 
-        if (likeIcon) {
-            likeIcon.addEventListener('click', toggleLike)
-        }
+        likeIcons.forEach(i => i.addEventListener('click', e => {
+            toggleLike(e.target.id, i.getAttribute('data-key'))
+        }))
     }
 </script>
