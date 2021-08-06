@@ -1,3 +1,9 @@
+<style type="text/css">
+#likeBtn:focus {
+    outline: none;
+}
+</style>
+
 @extends('layouts.app')
 
 @section('content')
@@ -47,7 +53,7 @@
 
                 <div class="pt-2 text-sm flex text-gray-400 text-2xl my-8">
                     @auth
-                        <button>
+                        <button id="likeBtn">
                             <i id="likeIcon" class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
                         </button>
                     @endauth
@@ -94,7 +100,6 @@
 
 <script type="text/javascript">
     window.onload = () => {
-        // const likeBtn = document.querySelector('#likeBtn')
         const likeIcon = document.querySelector('#likeIcon')
         let isLiked = '{{ $record->likes->contains(auth()->id()) }}' === '1'
 
