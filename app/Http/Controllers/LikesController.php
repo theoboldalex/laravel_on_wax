@@ -21,7 +21,8 @@ class LikesController extends Controller
         $record = Record::where('id', $recordId)->first();
 
         $record->likes()->attach(auth()->id());
-        return ['message' => 'success'];
+
+        return $record->likes()->count();
     }
 
     public function unlike()
@@ -30,6 +31,7 @@ class LikesController extends Controller
         $record = Record::where('id', $recordId)->first();
 
         $record->likes()->detach(auth()->id());
-        return ['message' => 'success'];
+
+        return $record->likes()->count();
     }
 }

@@ -51,7 +51,7 @@
                             <i id="likeIcon" class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
                         </button>
                     @endauth
-                    <span class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
+                    <span id="likeCount" class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
                 </div>
             </div>
         </div>
@@ -96,12 +96,12 @@
     window.onload = () => {
         // const likeBtn = document.querySelector('#likeBtn')
         const likeIcon = document.querySelector('#likeIcon')
-        var isLiked = '{{ $record->likes->contains(auth()->id()) }}' === '1'
-        isLiked = isLiked ? 'unlike' : 'like'
+        let isLiked = '{{ $record->likes->contains(auth()->id()) }}' === '1'
 
         const toggleLike = async () => {
-            const recordId = '{{ $record->id }}';
-            const url = `/records/${recordId}/${isLiked}`
+            const recordId = '{{ $record->id }}'
+            const route = isLiked ? 'unlike' : 'like'
+            const url = `/records/${recordId}/${route}`
 
             const res = await fetch(url, {
                 method: 'POST',
@@ -113,15 +113,19 @@
                 }
             })
 
-            updateView(isLiked)
-            isLiked = isLiked === 'like' ? 'unlike' : 'like'
+            const likeCount = await res.json()
+
+            updateView(isLiked, likeCount)
+            isLiked = !isLiked
         }
 
-        const updateView = (likeStatus) => {
-            console.log(likeStatus)
-            const classes = likeStatus === 'like' ? 'fas text-red-500' : ''
+        const updateView = (likeStatus, likeCount) => {
+            const classes = likeStatus ? 'fas text-red-500' : ''
+            const likes = document.querySelector('#likeCount')
 
-            if (likeStatus === 'like') {
+            likes.innerHTML = `${likeCount} ${likeCount === 1 ? 'like' : 'likes'}`
+
+            if (!likeStatus) {
                 likeIcon.classList.add('fas')
                 likeIcon.classList.add('text-red-500')
             } else {
