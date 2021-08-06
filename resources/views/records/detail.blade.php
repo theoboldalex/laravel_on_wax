@@ -47,12 +47,9 @@
 
                 <div class="pt-2 text-sm flex text-gray-400 text-2xl my-8">
                     @auth
-                        <form action="{{ $record->likes->contains(auth()->id()) ? route('unlike', $record->id) : route('like', $record->id) }}" method="post">
-                            @csrf
-                            <button type="submit">
-                                <i class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
-                            </button>
-                        </form>
+                        <button>
+                            <i id="likeIcon" class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
+                        </button>
                     @endauth
                     <span class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
                 </div>
@@ -94,3 +91,45 @@
         </div>
     </section>
 @endsection
+
+<script type="text/javascript">
+    window.onload = () => {
+        // const likeBtn = document.querySelector('#likeBtn')
+        const likeIcon = document.querySelector('#likeIcon')
+        var isLiked = '{{ $record->likes->contains(auth()->id()) }}' === '1'
+        isLiked = isLiked ? 'unlike' : 'like'
+
+        const toggleLike = async () => {
+            const recordId = '{{ $record->id }}';
+            const url = `/records/${recordId}/${isLiked}`
+
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-Token': '{{ @csrf_token() }}'
+                }
+            })
+
+            updateView(isLiked)
+            isLiked = isLiked === 'like' ? 'unlike' : 'like'
+        }
+
+        const updateView = (likeStatus) => {
+            console.log(likeStatus)
+            const classes = likeStatus === 'like' ? 'fas text-red-500' : ''
+
+            if (likeStatus === 'like') {
+                likeIcon.classList.add('fas')
+                likeIcon.classList.add('text-red-500')
+            } else {
+                likeIcon.classList.remove('fas')
+                likeIcon.classList.remove('text-red-500')
+            }
+        }
+
+        likeIcon.addEventListener('click', toggleLike)
+    }
+</script>
