@@ -74,7 +74,7 @@
                     <form action="{{ route('comment', $record->id) }}" method="post">
                         @csrf
                         <textarea name="comment" id="comment" cols="30" rows="5" class="border rounded-lg w-full p-2"></textarea>
-                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease block float-right">Submit</button>
+                        <button type="submit" class="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease block float-right">Submit</button>
                     </form>
                 <div>
             @endauth
