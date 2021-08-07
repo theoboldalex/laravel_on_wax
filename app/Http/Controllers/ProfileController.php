@@ -26,7 +26,7 @@ class ProfileController extends Controller
             $isFollowing = false;
         }
 
-        dd($user->followers);
+        dd($isFollowing);
         return view('users.profile', [
             'user' => $user,
             'isFollowing' => $isFollowing
