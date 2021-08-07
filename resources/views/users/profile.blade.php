@@ -36,33 +36,7 @@
     <section>
         <div class="card-grid my-8">
             @foreach ($user->records as $record)
-                <div class="rounded overflow-hidden border w-full bg-white">
-                    <a href="{{ route('record_detail', $record->id) }}">
-                        <img class="w-full bg-cover" src="{{ Storage::disk('s3')->url('public/records/' . $record->image) }}" width="200">
-                    </a>
-                    <div class="px-3 pb-2">
-                        <div class="pt-2 text-sm flex text-gray-400">
-                            @auth
-                                <form action="{{ $record->likes->contains(auth()->id()) ? route('unlike', $record->id) : route('like', $record->id) }}" method="post">
-                                    @csrf
-                                    <button type="submit">
-                                        <i class="far fa-heart cursor-pointer mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
-                                    </button>
-                                </form>
-                            @endauth
-                            <span class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
-                        </div>
-                        <div class="pt-1">
-                            <div class="mb-2 text-sm">
-                                <p class="font-medium mr-2">{{ $record->artist }}</p>
-                                <p class="">{{ $record->title }}</p>
-                            </div>
-                        </div>
-                        <a href="{{ route('record_detail', $record->id) }}">
-                            <div class="text-sm mb-2 text-gray-400 font-medium">{{ $record->created_at->diffForHumans() }}</div>
-                        </a>
-                    </div>
-                </div>
+                <x-record-card :record="$record" />
             @endforeach
         </div>
     </section>
