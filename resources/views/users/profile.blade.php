@@ -11,9 +11,9 @@
                     <h1 class="font-semibold text-xl mb-8 md:mb-0 md:text-3xl md:mr-8">{{ $user->username }}</h1>
                     @auth
                         @if(auth()->user()->username != request()->route('username'))
-                            <form action="{{ $isFollowing ? route('unfollow', $user->username) : route('follow', $user->username) }}" method="post">
+                            <form action="{{ $isFollowing == 1 ? route('unfollow', $user->username) : route('follow', $user->username) }}" method="post">
                                 @csrf
-                                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease">{{ $isFollowing ? 'Unfollow' : 'Follow' }}</button>
+                                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease">{{ $isFollowing == 1 ? 'Unfollow' : 'Follow' }}</button>
                             </form>
                         @else
                             <form action="" method="post">
@@ -67,9 +67,3 @@
         </div>
     </section>
 @endsection
-
-<script>
-    window.onload = () => {
-        console.log('{{ $isFollowing }}')
-    }
-</script>
