@@ -11,9 +11,10 @@
                     <h1 class="font-semibold text-xl mb-8 md:mb-0 md:text-3xl md:mr-8">{{ $user->username }}</h1>
                     @auth
                         @if(auth()->user()->username != request()->route('username'))
-                            <form action="{{ $isFollowing ? route('unfollow', $user->username) : route('follow', $user->username) }}" method="post">
+{{--                            {{ !!($user->followers->where('id', auth()->id()))  }}--}}
+                            <form action="{{ !!($user->followers->where('id', auth()->id())) ? route('unfollow', $user->username) : route('follow', $user->username) }}" method="post">
                                 @csrf
-                                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease">{{ $isFollowing ? 'Unfollow' : 'Follow' }}</button>
+                                <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease">{{ !!($user->followers->where('id', auth()->id())) ? 'Unfollow' : 'Follow' }}</button>
                             </form>
                         @else
                             <form action="" method="post">
@@ -67,3 +68,10 @@
         </div>
     </section>
 @endsection
+
+<script>
+    window.onload = () => {
+        console.log('{{ $isFollowing }}')
+        console.log(JSON.stringify('{{ $user->followers }}'))
+    }
+</script>

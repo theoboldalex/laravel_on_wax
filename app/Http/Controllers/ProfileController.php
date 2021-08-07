@@ -18,7 +18,7 @@ class ProfileController extends Controller
             }])
             ->firstOrFail();
 
-        if ($user->followers->count() > 0) {
+        if ($user->followers->count()) {
             foreach ($user->followers as $follower) {
                 $isFollowing = $follower->id == auth()->id();
             }
