@@ -1,9 +1,3 @@
-<style>
-#likeBtn:focus {
-    outline: none;
-}
-</style>
-
 @extends('layouts.app')
 
 @section('content')

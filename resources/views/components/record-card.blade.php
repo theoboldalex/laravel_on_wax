@@ -1,6 +1,13 @@
 @props(['record' => $record])
 
+<style>
+    #likeBtn:focus {
+        outline: none;
+    }
+</style>
+
 <div class="rounded overflow-hidden border w-full bg-white">
+    @if (Route::currentRouteName() === 'home')
     <div class="w-full flex justify-between p-3">
         <div class="flex">
             <div class="rounded-full h-8 w-8 bg-gray-500 flex items-center justify-center overflow-hidden">
@@ -10,6 +17,7 @@
                     href="{{ route('profile', $record->user->username) }}">{{ $record->user->username }}</a></span>
         </div>
     </div>
+    @endif
     <a href="{{ route('record_detail', $record->id) }}">
         <img class="w-full bg-cover" src="{{ Storage::disk('s3')->url('public/records/' . $record->image) }}" width="200">
     </a>
