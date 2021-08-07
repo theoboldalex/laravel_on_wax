@@ -67,3 +67,9 @@
         </div>
     </section>
 @endsection
+
+<script>
+    window.onload = () => {
+        console.log('{{ $isFollowing }}')
+    }
+</script>
