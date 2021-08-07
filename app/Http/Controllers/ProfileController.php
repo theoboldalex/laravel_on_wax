@@ -20,13 +20,13 @@ class ProfileController extends Controller
 
         $isFollowing = false;
 
-        if ($user->followers->count()) {
+//        if ($user->followers->count()) {
             foreach ($user->followers as $follower) {
                 $isFollowing = $follower->id == auth()->id();
             }
-        } else {
-            $isFollowing = false;
-        }
+//        } else {
+//            $isFollowing = false;
+//        }
 
         return view('users.profile', [
             'user' => $user,
