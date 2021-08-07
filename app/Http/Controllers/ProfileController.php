@@ -20,6 +20,7 @@ class ProfileController extends Controller
 
         return view('users.profile', [
             'user' => $user,
+            'isFollowing' => $user->followers->contains('id', auth()->id())
         ]);
     }
 
