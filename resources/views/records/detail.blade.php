@@ -16,7 +16,7 @@
                 <h1 class="font-semibold text-4xl">
                     {{ $record->title }}
                 </h1>
-                <h1 class="font-semibold text-2xl opacity-70">{{ $record->artist }}</h1>
+                <h1 class="font-semibold text-2xl text-gray-700">{{ $record->artist }}</h1>
                 <img src="{{ Storage::disk('s3')->url('public/records/' . $record->image) }}"
                      alt="album art for {{ $record->title }} by {{ $record->artist }}"
                      class="my-4"
