@@ -24,7 +24,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show()
     {
         $reqUsername = request()->route()->parameter('username');
 
