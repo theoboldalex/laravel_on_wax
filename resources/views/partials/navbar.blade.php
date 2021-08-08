@@ -18,7 +18,7 @@
                 <a class="text-sm font-semibold hover:text-opacity-50 py-2 md:ml-4" href="{{ route('register') }}">Register</a>
             @endguest
             @auth
-                <a class="text-sm font-semibold hover:text-opacity-50" href="{{ route('create', auth()->user()->username) }}">New Record</a>
+                <a class="text-sm font-semibold bg-gray-200 px-4 py-2 rounded-lg hover:bg-opacity-80 transition duration-300 ease-in-out" href="{{ route('create', auth()->user()->username) }}">+ New Record</a>
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex flex-row items-center w-full py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 focus:outline-none">
                         <span>
