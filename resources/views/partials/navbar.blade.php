@@ -1,6 +1,6 @@
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <div class="w-full text-gray-700 bg-primary z-50">
-    <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl mx-4 md:mx-40 md:items-center md:justify-between md:flex-row">
+    <div x-data="{ open: false }" class="flex flex-col mx-4 md:mx-40 md:items-center md:justify-between md:flex-row">
         <div class="py-4 flex flex-row items-center justify-between">
             <a href="{{ route('home') }}">
                 <img src="{{ asset('img/logo.png') }}" alt="site logo" width="100">
