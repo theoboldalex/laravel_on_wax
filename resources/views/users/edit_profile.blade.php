@@ -25,5 +25,11 @@
                 Save
             </button>
         </form>
+        <form action="{{ route('delete_user', auth()->user()->username) }}" method="POST">
+            @csrf
+            <button type="submit" class="w-full rounded-lg py-2 text-red-500 border border-red-500 opacity-70 hover:opacity-100 hover:bg-gray-100 transition duration:300 ease">
+                Delete Account
+            </button>
+        </form>
     </section>
 @endsection

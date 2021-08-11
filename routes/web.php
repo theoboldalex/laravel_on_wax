@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DeleteUserController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikesController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::group(['prefix' => '/users'], function () {
     Route::post('/{username}/unfollow', [FollowController::class, 'unfollow'])->name('unfollow')->middleware(['auth']);
     Route::get('/{username}/followers', [FollowController::class, 'followers'])->name('followers');
     Route::get('/{username}/following', [FollowController::class, 'following'])->name('following');
+    Route::post('/{username}/delete', [DeleteUserController::class, 'destroy'])->name('delete_user')->middleware(['auth']);
 });
 
 // RECORDS
