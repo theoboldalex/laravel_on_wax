@@ -14,7 +14,10 @@ class AddRelationToRecordsTable extends Migration
     public function up()
     {
         Schema::table('records', function (Blueprint $table) {
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
         });
     }
 
