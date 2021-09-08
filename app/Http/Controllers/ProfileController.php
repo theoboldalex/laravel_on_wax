@@ -43,7 +43,7 @@ class ProfileController extends Controller
 
         $path = $request->file('avatar')->storePublicly('public/avatar', 's3');
 
-        $user = User::where('id', auth()->id())
+        User::where('id', auth()->id())
             ->update(['avatar' => Str::after($path, 'public/avatar/')]);
 
         return redirect()->route('profile', $request->route()->username);
