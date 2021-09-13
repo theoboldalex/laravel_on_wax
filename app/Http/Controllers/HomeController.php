@@ -17,7 +17,7 @@ class HomeController extends Controller
             ->get();
 
         $following = User::with('following')
-            ->whereHas('followers', fn($query) => $query->where('user_id', auth()->id()))
+            ->whereRelation('followers', 'user_id', auth()->id())
             ->pluck('id');
 
         $feed = Record::with(['user', 'likes'])
