@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Record;
 use App\Models\User;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
