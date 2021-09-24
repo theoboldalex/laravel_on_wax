@@ -15,6 +15,7 @@ class RoutesTest extends TestCase
 
     public function testGetRecordById()
     {
+        // replace with db mock otherwise these records are added to the db every test run :o
         $record = Record::create([
             'title' => 'TEST_TITLE',
             'artist' => 'TEST_ARTIST',
