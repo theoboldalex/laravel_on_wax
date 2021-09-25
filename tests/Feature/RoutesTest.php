@@ -38,8 +38,13 @@ class RoutesTest extends TestCase
         $response->assertOk();
 
         $this->assertEquals(5, $userRecords->count());
+
+        $view = $this->view('users.profile', ['user' => $user]);
+        $view->assertSee($user->username);
+
         foreach ($userRecords as $record) {
             $this->assertEquals($record->user_id, $user->id);
+            $view->assertSee($record->id);
         }
     }
 }
