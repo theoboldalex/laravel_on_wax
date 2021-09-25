@@ -44,7 +44,7 @@ class RecordController extends Controller
             $path = $request->file('image')->storePublicly('public/records', 's3');
         }
 
-        $record = Record::create([
+        auth()->user()->records()->create([
             'title' => $request->title,
             'artist' => $request->artist,
             'label' => $request->label,
@@ -52,8 +52,7 @@ class RecordController extends Controller
             'year' => $request->year,
             'diameter' => $request->diameter,
             'rpm' => $request->rpm,
-            'image' => Str::after($path, 'public/records/'),
-            'user_id' => auth()->id()
+            'image' => Str::after($path, 'public/records/')
         ]);
 
 
