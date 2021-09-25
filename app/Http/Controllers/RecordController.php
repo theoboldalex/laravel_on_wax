@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RecordRequest;
 use App\Models\Record;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class RecordController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         return view('users.create');
     }
 
-    public function show($id)
+    public function show($id): Factory|View|Application
     {
         $record = Record::with([
             'likes',
@@ -30,14 +34,8 @@ class RecordController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(RecordRequest $request): RedirectResponse
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'artist' => 'required',
-            'image' => 'mimes:jpeg,jpg,png|max:30000'
-        ]);
-
         $path = Storage::disk('s3')->url('public/records/default-record.jpg');
 
         if ($request->file('image')) {
@@ -54,7 +52,6 @@ class RecordController extends Controller
             'rpm' => $request->rpm,
             'image' => Str::after($path, 'public/records/')
         ]);
-
 
         return redirect()->route('home');
     }
