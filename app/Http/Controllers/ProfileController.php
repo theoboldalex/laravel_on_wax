@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileImageRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         $reqUsername = request()->route()->parameter('username');
 
         $user = User::where('username', $reqUsername)
-            ->with(['followers', 'records' => function($query) {
-                $query->with('likes');
-            }])
+            ->with([
+                'followers', 'records' => function ($query) {
+                    $query->with('likes');
+                }
+            ])
             ->firstOrFail();
 
         return view('users.profile', [
@@ -24,7 +30,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function show()
+    public function show(): View|Factory|Application|RedirectResponse
     {
         $reqUsername = request()->route()->parameter('username');
 
@@ -35,12 +41,8 @@ class ProfileController extends Controller
         return view('users.edit_profile');
     }
 
-    public function store(Request $request)
+    public function store(ProfileImageRequest $request): RedirectResponse
     {
-        $this->validate($request, [
-            'image' => 'mimes:jpeg,jpg,png|max:30000'
-        ]);
-
         $path = $request->file('avatar')->storePublicly('public/avatar', 's3');
 
         User::where('id', auth()->id())
