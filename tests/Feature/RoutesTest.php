@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use App\Models\Record;
 use App\Models\User;
@@ -27,5 +27,19 @@ class RoutesTest extends TestCase
         $response->assertOk();
         $this->assertEquals('TEST_TITLE', $record->title);
         $this->assertEquals('TEST_ARTIST', $record->artist);
+    }
+
+    public function testGetUsersRecords()
+    {
+        $user = User::factory()->create();
+        $userRecords = Record::factory()->count(5)->for($user)->create();
+
+        $response = $this->get("/users/{$user->username}");
+        $response->assertOk();
+
+        $this->assertEquals(5, $userRecords->count());
+        foreach ($userRecords as $record) {
+            $this->assertEquals($record->user_id, $user->id);
+        }
     }
 }
