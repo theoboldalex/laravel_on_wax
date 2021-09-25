@@ -24,7 +24,8 @@
             </div>
             <div class="lg:w-6/12 flex flex-col justify-center items-center sm:text-2xl">
                 <div class="flex flex-col justify-center items-center my-4">
-                    <img src="{{ Storage::disk('s3')->url('public/avatar/' . $record->user->avatar) }}" alt="" width="100" class="rounded-full mr-4">
+                    <img src="{{ Storage::disk('s3')->url('public/avatar/' . $record->user->avatar) }}" alt=""
+                         width="100" class="rounded-full mr-4">
                     <a href="{{ route('profile', $record->user->username) }}">
                         <h4 class="font-semibold pr-4">{{ $record->user->username }}</h4>
                     </a>
@@ -53,47 +54,57 @@
                 <div class="pt-2 text-sm flex text-gray-400 text-2xl my-8">
                     @auth
                         <button id="likeBtn">
-                            <i id="likeIcon" class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
+                            <i id="likeIcon"
+                               class="far fa-heart mr-2 @if($record->likes->contains(auth()->id())) fas text-red-500 @endif"></i>
                         </button>
                     @endauth
-                    <span id="likeCount" class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
+                    <span id="likeCount"
+                          class="font-medium">{{ $record->likes->count() }} {{ Str::plural('like', $record->likes->count()) }}</span>
                 </div>
             </div>
         </div>
 
         @if ($record->comments->count())
-        <hr>
-        <div class="flex flex-col my-4">
-            <h2 class="font-semibold text-3xl">Comments</h2>
+            <hr>
+            <div class="flex flex-col my-4">
+                <h2 class="font-semibold text-3xl">Comments</h2>
+            </div>
         @endif
 
-            @auth
-                <div class="flex flex-col my-4">
-                    <h3 class="font-semibold text-2xl my-4">Add a comment</h3>
-                    <form action="{{ route('comment', $record->id) }}" method="post">
-                        @csrf
-                        <textarea name="comment" id="comment" cols="30" rows="5" class="border rounded-lg w-full p-2"></textarea>
-                        <button type="submit" class="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease block float-right">Submit</button>
-                    </form>
-                <div>
-            @endauth
+        @auth
+            <div class="flex flex-col my-4">
+                <h3 class="font-semibold text-2xl my-4">Add a comment</h3>
+                <form action="{{ route('comment', $record->id) }}" method="post">
+                    @csrf
+                    <textarea name="comment" id="comment" cols="30" rows="5"
+                              class="border rounded-lg w-full p-2"></textarea>
+                    <button type="submit"
+                            class="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:opacity-70 transition duration-300 ease block float-right">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        @endauth
 
-            @foreach($record->comments as $comment)
-                <div class="flex flex-col my-4">
-                    <div class="border rounded-xl p-8">
-                        <div class="flex items-center mb-4">
-                            <img src="{{ Storage::disk('s3')->url('public/avatar/' . $comment->user->avatar) }}" alt="" width="50" class="rounded-full mr-4">
-                            <h4 class="font-semibold mr-4"><a href="{{ route('profile', $comment->user->username) }}">{{ $comment->user->username }}</a></h4>
-                            <h4 class="text-gray-400">{{ $comment->created_at->diffForHumans() }}</h4>
-                        </div>
-                        <hr>
-                        <div class="font-light mt-4">
-                            {{ $comment->body }}
-                        </div>
+        @foreach ($record->comments as $comment)
+            <div class="flex flex-col my-4">
+                <div class="border rounded-xl p-8">
+                    <div class="flex items-center mb-4">
+                        <img
+                            src="{{ Storage::disk('s3')->url('public/avatar/' . $comment->user->avatar) }}"
+                            alt="" width="50" class="rounded-full mr-4">
+                        <h4 class="font-semibold mr-4"><a
+                                href="{{ route('profile', $comment->user->username) }}">{{ $comment->user->username }}</a>
+                        </h4>
+                        <h4 class="text-gray-400">{{ $comment->created_at->diffForHumans() }}</h4>
+                    </div>
+                    <hr>
+                    <div class="font-light mt-4">
+                        {{ $comment->body }}
                     </div>
                 </div>
-            @endforeach
-        </div>
+            </div>
+        @endforeach
     </section>
 @endsection
 

@@ -16,9 +16,12 @@ class RecordController extends Controller
 
     public function show($id)
     {
-        $record = Record::with(['likes', 'comments' => function($query) {
-            $query->with('user');
-        }])
+        $record = Record::with([
+            'likes',
+            'comments' => function ($query) {
+                $query->with('user');
+            }
+        ])
             ->where('id', $id)
             ->firstOrFail();
 
