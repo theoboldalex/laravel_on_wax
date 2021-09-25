@@ -35,7 +35,11 @@ class RecordController extends Controller
             'image' => 'mimes:jpeg,jpg,png|max:30000'
         ]);
 
-        $path = $request->file('image')->storePublicly('public/records', 's3');
+        $path = Storage::disk('s3')->url('public/records/default-record.jpg');
+
+        if ($request->file('image')) {
+            $path = $request->file('image')->storePublicly('public/records', 's3');
+        }
 
         $record = Record::create([
             'title' => $request->title,
