@@ -3,10 +3,14 @@
 namespace Tests\Unit;
 
 use App\Models\Record;
+use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class RoutesTest extends TestCase
 {
+    use DatabaseTransactions;
+
     public function testGetIndexPageIsOk()
     {
         $response = $this->get('/');
@@ -15,14 +19,10 @@ class RoutesTest extends TestCase
 
     public function testGetRecordById()
     {
-        // replace with db mock otherwise these records are added to the db every test run :o
-        $record = Record::create([
-            'title' => 'TEST_TITLE',
-            'artist' => 'TEST_ARTIST',
-            'user_id' => 5
-        ]);
+        $user = User::factory()->create();
+        $record = Record::factory()->for($user)->create();
 
-        $response = $this->get('/records/'.$record->id);
+        $response = $this->get("/records/{$record->id}");
 
         $response->assertOk();
         $this->assertEquals('TEST_TITLE', $record->title);
