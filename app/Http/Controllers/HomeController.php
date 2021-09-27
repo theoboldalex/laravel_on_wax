@@ -2,28 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Record;
-use App\Models\User;
+use App\Repositories\HomeRepository;
 
 class HomeController extends Controller
 {
+    private HomeRepository $homeRepository;
+
+    public function __construct(HomeRepository $homeRepository)
+    {
+        $this->homeRepository = $homeRepository;
+    }
+
     public function index()
     {
-        $records = Record::with(['user', 'likes'])
-            ->orderByDesc('created_at')
-            ->take(4)
-            ->get();
-
-        $following = User::with('following')
-            ->whereRelation('followers', 'user_id', auth()->id())
-            ->pluck('id');
-
-        $feed = Record::with(['user', 'likes'])
-            ->whereHas('user', function ($query) use ($following) {
-                $query->whereIn('id', $following);
-            })
-            ->orderByDesc('created_at')
-            ->paginate(20);
+        $records = $this->homeRepository->getLatestRecords();
+        $feed = $this->homeRepository->getUserFeed(auth()->id());
 
         return view('home.index', [
             'records' => $records,
