@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class FollowController extends Controller
 {
-    public function follow()
+    public function follow(): RedirectResponse
     {
         $username = request()->route()->parameter('username');
 
@@ -22,7 +26,7 @@ class FollowController extends Controller
             ->route('profile', $user->username);
     }
 
-    public function unfollow()
+    public function unfollow(): RedirectResponse
     {
         $username = request()->route()->parameter('username');
 
@@ -36,7 +40,7 @@ class FollowController extends Controller
             ->route('profile', $user->username);
     }
 
-    public function following()
+    public function following(): Factory|View|Application
     {
         $username = request()->route()->parameter('username');
 
@@ -49,7 +53,7 @@ class FollowController extends Controller
         ]);
     }
 
-    public function followers()
+    public function followers(): Factory|View|Application
     {
         $username = request()->route()->parameter('username');
 
