@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\HomeRepository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
 {
@@ -13,7 +16,7 @@ class HomeController extends Controller
         $this->homeRepository = $homeRepository;
     }
 
-    public function index()
+    public function index(): Factory|View|Application
     {
         $records = $this->homeRepository->getLatestRecords();
         $feed = $this->homeRepository->getUserFeed(auth()->id());

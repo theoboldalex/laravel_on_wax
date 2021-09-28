@@ -3,24 +3,22 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
-    public function index()
+    public function index(): Factory|View|Application
     {
         return view('auth.login');
     }
 
-    public function store(Request $request)
+    public function store(LoginRequest $request): RedirectResponse
     {
-        $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required'
-        ]);
-
-        if (!auth()->attempt($request->only('email', 'password')))
-        {
+        if (!auth()->attempt($request->only('email', 'password'))) {
             return back()->with('status', 'Invalid credentials');
         }
 
