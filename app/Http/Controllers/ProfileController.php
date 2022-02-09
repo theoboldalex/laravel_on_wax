@@ -51,3 +51,4 @@ class ProfileController extends Controller
         return redirect()->route('profile', $request->route()->username);
     }
 }
+

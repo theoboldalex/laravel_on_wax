@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class HomeRepository implements IHomeRepository
 {
-
     public function getLatestRecords(): Collection|array
     {
         return Record::with(['user', 'likes'])
