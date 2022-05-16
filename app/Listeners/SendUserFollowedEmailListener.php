@@ -19,6 +19,6 @@ class SendUserFollowedEmailListener
     public function handle(UserFollowed $event)
     {
         Mail::to($event->user->email)
-            ->send(new UserFollowedEmail($event->user));
+            ->send(new UserFollowedEmail($event->user, $event->follower));
     }
 }

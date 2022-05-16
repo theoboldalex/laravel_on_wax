@@ -17,9 +17,8 @@ class UserFollowedEmail extends Mailable
      *
      * @return void
      */
-    public function __construct(public User $user)
+    public function __construct(public User $user, public User $follower)
     {
-        //
     }
 
     /**

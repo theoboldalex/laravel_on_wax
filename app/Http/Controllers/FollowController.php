@@ -17,12 +17,11 @@ class FollowController extends Controller
     {
         $username = request()->route()->parameter('username');
 
-
         $user = User::where('username', $username)
             ->with('records')
             ->firstOrFail();
 
-        UserFollowed::dispatch($user);
+        UserFollowed::dispatch($user, auth()->user());
 
         $user->followers()->attach(auth()->id());
 
