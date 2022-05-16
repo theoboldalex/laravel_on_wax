@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserFollowed;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -18,7 +19,9 @@ class FollowController extends Controller
 
         $user = User::where('username', $username)
             ->with('records')
-            ->first();
+            ->firstOrFail();
+
+        UserFollowed::dispatch($user, auth()->user());
 
         $user->followers()->attach(auth()->id());
 
