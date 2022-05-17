@@ -9,6 +9,7 @@
           integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
           crossorigin="anonymous"/>
     <title>On Wax</title>
+    @livewireStyles
 </head>
 <body>
 <header>
@@ -17,8 +18,6 @@
 <main class="mx-4 md:mx-40">
     @yield('content')
 </main>
-{{-- <footer>
-  @include('partials.footer')
-</footer> --}}
+@livewireScripts
 </body>
 </html>
