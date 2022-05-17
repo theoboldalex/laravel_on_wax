@@ -19,7 +19,7 @@ class FollowButton extends Component
 
     public function mount()
     {
-        $this->buttonText = $this->isFollowing ? 'Unfollow' : 'Follow';
+        $this->updateButtonText();
     }
 
     public function toggleFollowing()
@@ -33,7 +33,7 @@ class FollowButton extends Component
         }
 
         $this->isFollowing = !$this->isFollowing;
-        $this->buttonText = $this->isFollowing ? 'Unfollow' : 'Follow';
+        $this->updateButtonText();
     }
 
     private function follow()
@@ -46,5 +46,10 @@ class FollowButton extends Component
     private function unfollow()
     {
         $this->user->followers()->detach(auth()->id());
+    }
+
+    private function updateButtonText()
+    {
+        $this->buttonText = $this->isFollowing ? 'Unfollow' : 'Follow';
     }
 }
